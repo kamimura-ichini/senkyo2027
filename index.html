@@ -1,0 +1,2874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>統一地方選挙2027 特設サイト｜あなたのお住まいの地域の選挙がわかる</title>
+<meta name="description" content="2027年4月に行われる第21回統一地方選挙の特設サイト。選挙日程、地域ごとの選挙情報、投票マッチング、選挙の基礎知識をまとめてお届けします。" />
+<meta property="og:title" content="統一地方選挙2027 特設サイト" />
+<meta property="og:description" content="あなたのお住まいの地域の選挙がわかる。第21回統一地方選挙の日程・候補者・基礎知識をまとめてチェック。" />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    /* クローム配色（出典: shugiin.go2senkyo.com/51） */
+    --chrome-gray: #555;
+    --chrome-gray-sub: #7c7c7c;
+    --beige: #edede2;
+    --beige-light: #f6f6f0;
+    --taupe: #bfafa3;
+
+    --brand: #38aaaa;
+    --brand-dark: #2d8c8c;
+    --brand-soft: #e8f6f6;
+    --navy: #246868;
+    --navy-soft: #eef7f7;
+    --accent: #38aaaa;
+    --accent-soft: #e8f6f6;
+    --text: #333;
+    --muted: #7c7c7c;
+    --line: #ddd7cb;
+    --bg: #f6f6f0;
+    --surface: #ffffff;
+    --radius: 6px;
+    --radius-sm: 5px;
+    --shadow-sm: 0 1px 2px rgb(85 85 85 / 0.07), 0 2px 8px rgb(85 85 85 / 0.06);
+    --shadow-md: 0 4px 12px rgb(85 85 85 / 0.1), 0 12px 32px rgb(85 85 85 / 0.09);
+    --header-h: 56px;
+    --nav-h: 54px;
+    --foot-bg: #edede2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+
+  body {
+    margin: 0;
+    padding-top: var(--header-h);
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic Medium", "Meiryo", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  .skip-link {
+    position: absolute;
+    left: 8px;
+    top: -60px;
+    z-index: 1000001;
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    text-decoration: none;
+    transition: top .2s;
+  }
+  .skip-link:focus-visible { top: 0; }
+
+  :focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .inner {
+    width: min(1080px, 100% - 40px);
+    margin-inline: auto;
+  }
+
+  /* ---------- 表示切替ユーティリティ ---------- */
+  .pc { display: block; }
+  .sp, .sp_tb { display: none; }
+  .bold { font-weight: 700; }
+  .medium { font-weight: 500; }
+  .underline { text-decoration-line: underline; }
+
+  /* ---------- header（m_head / 出典: shugiin.go2senkyo.com/51） ---------- */
+  .m_head {
+    width: 100%;
+    height: var(--header-h);
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: var(--chrome-gray);
+    z-index: 1000000;
+  }
+  .m_head_inner {
+    padding-left: 3%;
+    margin: auto;
+    justify-content: space-between;
+    position: relative;
+  }
+  .m_head_inner, .m_head_left, .m_head_right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .m_head_logo { display: flex; align-items: center; text-decoration: none; }
+  .m_head_logo_image { width: 40px; margin-right: 15px; flex: none; }
+  .m_head_logo_para {
+    margin: 0;
+    color: #fff;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    letter-spacing: .1em;
+  }
+  .m_head_logo_para .small { font-size: 18px; margin-right: 5px; }
+  .m_head_logo_para .big { font-size: 16px; }
+
+  /* PCヘッダー右／SP固定ナビ 共通リスト */
+  .m_nav_list { display: flex; height: 100%; margin: 0; padding: 0; list-style: none; }
+  .m_nav_list li {
+    margin-left: -1px;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+  }
+  .m_nav_list li .link, .m_nav_list li a {
+    color: #fff;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    height: 100%;
+    min-width: 140px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .m_nav_list li .link:hover, .m_nav_list li a:hover { opacity: .5; }
+  .m_nav_list li .icon { width: 24px; display: block; line-height: 0; margin-right: 5px; }
+  .m_nav_list li .text { font-size: 14px; }
+
+  .m_head_btn_outer {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .m_head_btn {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 16px;
+    transition: all .4s;
+  }
+  .m_head_btn span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: all .4s;
+    display: inline-block;
+  }
+  .m_head_btn span:first-of-type { top: 0; animation: menu-bar01 .75s forwards; }
+  .m_head_btn span:nth-of-type(2) { top: 7px; transition: all .25s .25s; opacity: 1; }
+  .m_head_btn span:nth-of-type(3) { bottom: 0; animation: menu-bar02 .75s forwards; }
+  .m_head_btn[aria-current="true"] span:first-of-type { animation: active-menu-bar01 .75s forwards; }
+  .m_head_btn[aria-current="true"] span:nth-of-type(2) { opacity: 0; }
+  .m_head_btn[aria-current="true"] span:nth-of-type(3) { animation: active-menu-bar03 .75s forwards; }
+
+  /* ハンバーガーで開くメニュー */
+  .m_head_nav {
+    position: fixed;
+    width: 100%;
+    max-width: 500px;
+    top: var(--header-h);
+    right: 0;
+    display: none;
+    opacity: 0;
+    height: calc(100% - var(--header-h));
+    z-index: 999999;
+    background-color: var(--chrome-gray);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .m_head_nav[aria-current="true"] {
+    display: block;
+    opacity: 1;
+    animation: fadeIn .1s ease-in forwards;
+  }
+  .m_head_nav_list {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .m_head_nav_list li { width: 100%; border-top: 1px solid #fff; }
+  .m_head_nav_list li a,
+  .m_head_nav_list li .link {
+    width: 100%;
+    padding: 15px 0;
+    display: block;
+    color: #fff;
+    line-height: 1.4;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .m_head_nav_list li a:hover,
+  .m_head_nav_list li .link:hover { opacity: .7; }
+  .m_head_nav_footer { padding: 40px 0 120px; }
+  .m_head_nav_link {
+    width: min(350px, 84%);
+    margin: 0 auto 20px;
+    padding: 15px 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .m_head_nav_link a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .m_head_nav_link a:hover { text-decoration: underline; }
+  .m_head_nav_link .logo { width: 116px; display: block; line-height: 0; }
+  .m_head_nav_link .logo img { width: 100%; display: block; }
+  .m_head_sublist {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .m_head_sublist li { margin: 0 25px; width: 28px; }
+  .m_head_sublist a { display: block; color: #fff; }
+  .m_head_sublist svg { width: 28px; height: 28px; display: block; }
+
+  @media screen and (max-width: 979px) {
+    :root { --header-h: 46px; }
+    html { scroll-padding-top: 16px; }
+    .pc { display: none; }
+    .sp_tb { display: block; }
+    body { padding-bottom: var(--nav-h); }
+    .m_head { position: fixed; background-color: var(--chrome-gray); }
+    .m_head_inner { padding: 0 3%; }
+    .m_head_left { width: auto; flex: 1; }
+    .m_head_logo { justify-content: flex-start; width: auto; }
+    .m_head_logo_image { margin-right: 0; width: 37px; }
+    .m_head_logo_para { display: none; }
+    .m_head_right { flex: none; }
+    .m_head_nav { max-width: none; }
+    .m_head_btn_outer { padding: 10px; }
+    .m_head .m_head_btn span { background-color: #fff; }
+    .m_head.is-menu-open { z-index: 1000001; }
+  }
+
+  @media screen and (max-width: 767px) {
+    .sp { display: block; }
+  }
+
+  /* ---------- SP/タブレット固定ナビ（m_nav） ---------- */
+  .m_nav { display: none; }
+
+  @media screen and (max-width: 979px) {
+    .m_nav {
+      display: block;
+      position: fixed;
+      width: 100%;
+      height: var(--nav-h);
+      bottom: 0;
+      left: 0;
+      background-color: var(--chrome-gray);
+      color: #fff;
+      border-top: 1px solid #fff;
+      z-index: 1000000;
+    }
+    .m_nav_list li {
+      width: 100%;
+      margin-left: 0;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    .m_nav_list li .link, .m_nav_list li a {
+      display: block;
+      text-align: center;
+      min-width: auto;
+      padding: 8px 10px 10px;
+    }
+    .m_nav_list li .icon { width: 24px; margin: auto; }
+    .m_nav_list li .text { font-size: 11px; line-height: 1; display: block; margin-top: 5px; }
+    .m_nav_list li .m_head_btn { margin: 7px auto; }
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes menu-bar01 {
+    0% { transform: translateY(7px) rotate(45deg); }
+    50% { transform: translateY(7px) rotate(0); }
+    to { transform: translateY(0) rotate(0); }
+  }
+  @keyframes menu-bar02 {
+    0% { transform: translateY(-7px) rotate(-45deg); }
+    50% { transform: translateY(-7px) rotate(0); }
+    to { transform: translateY(0) rotate(0); }
+  }
+  @keyframes active-menu-bar01 {
+    0% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(7px) rotate(0); }
+    to { transform: translateY(7px) rotate(45deg); }
+  }
+  @keyframes active-menu-bar03 {
+    0% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-7px) rotate(0); }
+    to { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  /* ---------- 選挙を探す モーダル ---------- */
+  .search-dialog {
+    width: min(560px, 92vw);
+    padding: 0;
+    border: 1px solid #000;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .search-dialog::backdrop { background: rgb(16 23 38 / .55); }
+  .search-dialog__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .search-dialog__head h2 { margin: 0; font-size: 16px; font-weight: 800; }
+  .search-dialog__close {
+    border: none;
+    background: none;
+    font-size: 22px;
+    line-height: 1;
+    padding: 6px 8px;
+    cursor: pointer;
+    color: var(--muted);
+    font-family: inherit;
+  }
+  .search-dialog__close:hover { color: var(--text); }
+  .search-dialog__body { padding: 20px; display: grid; gap: 16px; }
+  .search-dialog__body h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .search-dialog__body p.hint { margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    color: #fff;
+    background:
+      radial-gradient(1000px 460px at 88% -10%, rgb(180 232 232 / .32), transparent 62%),
+      radial-gradient(760px 420px at 6% 108%, rgb(20 80 80 / .5), transparent 60%),
+      linear-gradient(160deg, #38aaaa 0%, #2d8c8c 58%, #246868 100%);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgb(255 255 255 / .05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgb(255 255 255 / .05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(180deg, rgb(0 0 0 / .8), transparent 78%);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    padding: clamp(44px, 7vw, 78px) 0 clamp(40px, 6vw, 62px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    gap: clamp(28px, 4vw, 52px);
+    align-items: center;
+  }
+  @media (max-width: 880px) {
+    .hero__inner { grid-template-columns: 1fr; }
+  }
+
+  .hero__title {
+    margin: 0 0 16px;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: .02em;
+  }
+  .hero__title .times {
+    display: block;
+    font-size: clamp(17px, 2.6vw, 25px);
+    letter-spacing: .18em;
+    color: rgb(255 255 255 / .9);
+    margin-bottom: 10px;
+  }
+  .hero__title .main {
+    display: block;
+    font-size: clamp(38px, 7.6vw, 73px);
+    text-shadow: 0 6px 24px rgb(20 80 80 / .38);
+  }
+  .hero__catch {
+    margin: 0 0 26px;
+    font-size: clamp(17px, 2.5vw, 24px);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  @media screen and (max-width: 979px) {
+    .hero__actions {
+      flex-wrap: nowrap;
+      gap: 8px;
+    }
+    .hero__actions .btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 12px 8px;
+      font-size: 13px;
+      line-height: 1.35;
+      text-align: center;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--primary { background: var(--brand); color: #fff; }
+  .btn--primary:hover { background: var(--brand-dark); }
+  .btn--ghost { background: transparent; color: #fff; border-color: rgb(255 255 255 / .5); }
+  .btn--ghost:hover { border-color: #fff; background: rgb(255 255 255 / .1); }
+  .btn--outline { background: #fff; color: var(--brand); border-color: currentColor; }
+  .btn--outline:hover { background: var(--brand-soft); }
+
+  /* countdown */
+  .countdown {
+    background: rgb(255 255 255 / .1);
+    border: 1px solid rgb(255 255 255 / .2);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    backdrop-filter: blur(6px);
+  }
+  .countdown__label {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: rgb(255 255 255 / .72);
+    margin: 0 0 4px;
+  }
+  .countdown__target {
+    margin: 0 0 16px;
+    font-size: 19px;
+    font-weight: 800;
+  }
+  .countdown__units {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 0;
+  }
+  .countdown__unit {
+    margin: 0;
+    background: rgb(255 255 255 / .95);
+    color: var(--navy);
+    border-radius: var(--radius-sm);
+    padding: 10px 4px 8px;
+    text-align: center;
+  }
+  .countdown__num {
+    display: block;
+    font-size: clamp(20px, 3.4vw, 28px);
+    font-weight: 800;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .countdown__cap { font-size: 11px; color: var(--muted); font-weight: 700; }
+  .countdown__note { margin: 12px 0 0; font-size: 11.5px; color: rgb(255 255 255 / .66); line-height: 1.6; }
+
+  /* ---------- sections ---------- */
+  .section { padding: clamp(52px, 7vw, 84px) 0; }
+  .section--tint { background: var(--surface); }
+  .section--navy { background: var(--navy); color: #fff; }
+
+  .section__head { margin-bottom: 32px; }
+  .section__head--center { text-align: center; }
+  .section__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    color: var(--brand);
+    margin-bottom: 8px;
+  }
+  .section--navy .section__label { color: var(--beige); }
+  .section__title {
+    margin: 0 0 10px;
+    font-size: clamp(22px, 3.4vw, 31px);
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: .01em;
+  }
+  .section__desc { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 46em; }
+  .section__head--center .section__desc { margin-inline: auto; }
+  .section--navy .section__desc { color: rgb(255 255 255 / .78); }
+
+  /* ---------- schedule ---------- */
+  .schedule {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .sched-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .sched-card__head {
+    padding: 16px 22px;
+    color: #fff;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .sched-card--first .sched-card__head { background: linear-gradient(100deg, #04a6a5 0%, #5e7a7a 100%); }
+  .sched-card--second .sched-card__head { background: linear-gradient(100deg, #c45354 0%, #5e7a7a 100%); }
+  .sched-card__title { margin: 0; font-size: 18px; font-weight: 800; }
+  .sched-card__vote {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 700;
+    background: rgb(255 255 255 / .2);
+    border-radius: 999px;
+    padding: 3px 12px;
+    white-space: nowrap;
+  }
+  .sched-card__body { padding: 6px 0 0; }
+
+  table.sched {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  table.sched th, table.sched td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: middle;
+  }
+  table.sched thead th {
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: var(--muted);
+    background: var(--beige-light);
+    font-weight: 700;
+  }
+  table.sched tbody th { font-weight: 700; }
+  table.sched tbody tr:last-child th,
+  table.sched tbody tr:last-child td { border-bottom: none; }
+  table.sched td.date { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
+  table.sched td.date span { font-weight: 500; color: var(--muted); font-size: 12.5px; }
+
+  .note {
+    margin: 18px 0 0;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ---------- area search ---------- */
+  .btn-sm {
+    padding: 11px 18px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s;
+  }
+  .btn-sm:hover { background: #6b6b6b; }
+  .btn-sm--wide { width: 100%; }
+
+  /* ---------- 都道府県マップ（再利用キット: docs/components/japan-pref-map/） ---------- */
+  .m_map_outer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 34px 30px 40px;
+  }
+  .m_map_ttl {
+    margin: 0 0 10px;
+    padding-left: 14px;
+    border-left: 6px solid #38aaaa;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+  .m_map_lead {
+    margin: 0 0 26px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .m_map_wrapp {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .m_map_inner {
+    width: 100%;
+    max-width: 900px;
+    min-width: 560px;
+    margin: 0 auto;
+  }
+  .m_map {
+    --row: 50px;
+    --h: 42px;
+    --h2: calc(var(--h) + var(--row));
+    position: relative;
+    height: calc(var(--row) * 11 + var(--h));
+  }
+  .m_map div {
+    position: absolute;
+    width: 7.1%;
+    height: var(--h);
+    border-radius: 4px;
+    line-height: 1;
+    text-align: center;
+    transition: opacity .16s ease;
+  }
+  .m_map div.is-wide { width: 14.8%; }
+  .m_map div.is-tall { height: var(--h2); }
+  .m_map div:hover { opacity: .78; }
+  .m_map a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .m_map a:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+  .m_map a[aria-current="location"] {
+    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px rgb(0 0 0 / .28);
+  }
+
+  /* 地方ごとの配色 */
+  .m_map .hokkaidou { background: #9fa0a0; }
+  .m_map .aomori, .m_map .iwate, .m_map .akita,
+  .m_map .miyagi, .m_map .yamagata, .m_map .fukushima { background: #d89043; }
+  .m_map .ibaraki, .m_map .tochigi, .m_map .gunma, .m_map .saitama,
+  .m_map .chiba, .m_map .tokyo, .m_map .kanagawa { background: #565a9a; }
+  .m_map .niigata, .m_map .toyama, .m_map .ishikawa, .m_map .fukui,
+  .m_map .yamanashi, .m_map .nagano, .m_map .gifu,
+  .m_map .sizuoka, .m_map .aichi { background: #d66161; }
+  .m_map .mie, .m_map .shiga, .m_map .kyoto, .m_map .osaka,
+  .m_map .hyogo, .m_map .nara, .m_map .wakayama { background: #2894c4; }
+  .m_map .tottori, .m_map .shimane, .m_map .okayama,
+  .m_map .hiroshima, .m_map .yamaguchi { background: #a86a4f; }
+  .m_map .tokushima, .m_map .kagawa, .m_map .ehime, .m_map .kochi { background: #5eb430; }
+  .m_map .fukuoka, .m_map .saga, .m_map .nagasaki, .m_map .kumamoto,
+  .m_map .ohita, .m_map .miyazaki, .m_map .kagoshima, .m_map .okinawa { background: #4aa1ac; }
+
+  /* 配置（列: 7.75% 刻み / 行: --row 刻み） */
+  .m_map .hokkaidou { right: 0; top: 0; }
+  .m_map .aomori    { right: 0;     top: calc(var(--row) * 2); }
+  .m_map .iwate     { right: 0;     top: calc(var(--row) * 3); }
+  .m_map .akita     { right: 7.75%; top: calc(var(--row) * 3); }
+  .m_map .miyagi    { right: 0;     top: calc(var(--row) * 4); }
+  .m_map .yamagata  { right: 7.75%; top: calc(var(--row) * 4); }
+  .m_map .fukushima { right: 0;     top: calc(var(--row) * 5); }
+  .m_map .niigata   { right: 15.5%; top: calc(var(--row) * 5); }
+  .m_map .toyama    { left: 69.75%; top: calc(var(--row) * 5); }
+  .m_map .ishikawa  { left: 62%;    top: calc(var(--row) * 5); }
+  .m_map .tochigi   { right: 0;     top: calc(var(--row) * 6); }
+  .m_map .gunma     { right: 7.75%; top: calc(var(--row) * 6); }
+  .m_map .nagano    { right: 15.5%; top: calc(var(--row) * 6); }
+  .m_map .gifu      { left: 69.75%; top: calc(var(--row) * 6); }
+  .m_map .fukui     { left: 62%;    top: calc(var(--row) * 6); }
+  .m_map .ibaraki   { right: 0;     top: calc(var(--row) * 7); }
+  .m_map .saitama   { right: 7.75%; top: calc(var(--row) * 7); }
+  .m_map .shiga     { left: 62%;    top: calc(var(--row) * 7); }
+  .m_map .kyoto     { left: 54.25%; top: calc(var(--row) * 7); }
+  .m_map .hyogo     { left: 46.5%;  top: calc(var(--row) * 7); }
+  .m_map .tottori   { left: 38.75%; top: calc(var(--row) * 7); }
+  .m_map .shimane   { left: 31%;    top: calc(var(--row) * 7); }
+  .m_map .yamaguchi { left: 23.25%; top: calc(var(--row) * 7); }
+  .m_map .chiba     { right: 0;     top: calc(var(--row) * 8); }
+  .m_map .tokyo     { right: 7.75%; top: calc(var(--row) * 8); }
+  .m_map .yamanashi { right: 15.5%; top: calc(var(--row) * 8); }
+  .m_map .aichi     { left: 69.75%; top: calc(var(--row) * 8); }
+  .m_map .mie       { left: 62%;    top: calc(var(--row) * 8); }
+  .m_map .nara      { left: 54.25%; top: calc(var(--row) * 8); }
+  .m_map .osaka     { left: 46.5%;  top: calc(var(--row) * 8); }
+  .m_map .okayama   { left: 38.75%; top: calc(var(--row) * 8); }
+  .m_map .hiroshima { left: 31%;    top: calc(var(--row) * 8); }
+  .m_map .ohita     { left: 15.5%;  top: calc(var(--row) * 8); }
+  .m_map .fukuoka   { left: 7.75%;  top: calc(var(--row) * 8); }
+  .m_map .saga      { left: 0;      top: calc(var(--row) * 8); }
+  .m_map .kanagawa  { right: 7.75%; top: calc(var(--row) * 9); }
+  .m_map .sizuoka   { right: 15.5%; top: calc(var(--row) * 9); }
+  .m_map .wakayama  { left: 46.5%;  top: calc(var(--row) * 9); }
+  .m_map .kagawa    { left: 38.75%; top: calc(var(--row) * 9); }
+  .m_map .ehime     { left: 31%;    top: calc(var(--row) * 9); }
+  .m_map .miyazaki  { left: 15.5%;  top: calc(var(--row) * 9); }
+  .m_map .kumamoto  { left: 7.75%;  top: calc(var(--row) * 9); }
+  .m_map .nagasaki  { left: 0;      top: calc(var(--row) * 9); }
+  .m_map .tokushima { left: 38.75%; top: calc(var(--row) * 10); }
+  .m_map .kochi     { left: 31%;    top: calc(var(--row) * 10); }
+  .m_map .kagoshima { left: 7.75%;  top: calc(var(--row) * 10); }
+  .m_map .okinawa   { left: 0;      top: calc(var(--row) * 11); }
+
+  @media (max-width: 900px) {
+    .m_map_outer { padding: 26px 18px 30px; }
+    .m_map_ttl { font-size: 21px; }
+    .m_map_lead { font-size: 14px; margin-bottom: 20px; }
+    .m_map_inner { min-width: 540px; }
+    .m_map { --row: 42px; --h: 35px; }
+    .m_map a { font-size: 12.5px; }
+  }
+
+  /* ---------- 都道府県別 選挙・選挙区 ---------- */
+  .pref-elections {
+    margin-top: 24px;
+    padding: clamp(24px, 4vw, 38px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    scroll-margin-top: calc(var(--header-h) + 18px);
+  }
+  .pref-elections[hidden] { display: none; }
+  .pref-elections__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pref-elections__title {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.35;
+  }
+  .pref-elections__summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .municipality-search {
+    display: block;
+    max-width: 480px;
+    margin-bottom: 20px;
+  }
+  .municipality-search span {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .municipality-search input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 15px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+  }
+  .municipality-search input:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(82 156 199 / .16);
+  }
+  .municipality-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .municipality-list li[hidden] { display: none; }
+  .municipality-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 48px;
+    padding: 9px 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+  }
+  .municipality-list a:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: #327494;
+  }
+  .municipality-list a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .municipality-list__count {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .municipality-list__empty,
+  .election-category__empty {
+    margin: 0;
+    padding: 20px;
+    background: var(--beige-light);
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  .municipality-list__empty[hidden],
+  .election-category__empty[hidden] { display: none; }
+  .pref-assembly-direct {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 24px;
+    padding: 18px;
+    border-radius: var(--radius-sm);
+    background: var(--beige-light);
+    border: 1px solid var(--line);
+  }
+  .pref-assembly-direct[hidden] { display: none; }
+  .pref-assembly-direct strong {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 14px;
+  }
+  .pref-assembly-direct span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .pref-assembly-direct a,
+  .assembly-match-note button {
+    flex: 0 0 auto;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--navy);
+    color: #fff;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .municipality-result[hidden] { display: none; }
+  .area-back {
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #327494;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .area-back:hover { text-decoration: underline; }
+  .municipality-result__head {
+    margin-bottom: 22px;
+    padding: 18px 20px;
+    border-left: 6px solid var(--accent);
+    background: var(--accent-soft);
+  }
+  .municipality-result__head h4 {
+    margin: 0;
+    font-size: clamp(20px, 3vw, 27px);
+    line-height: 1.4;
+  }
+  .election-category + .election-category { margin-top: 32px; }
+  .election-category__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .election-category__number {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .election-category__head h5 {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  .election-category__head p {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .assembly-match-note {
+    padding: 18px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--beige-light);
+    text-align: center;
+  }
+  .assembly-match-note[hidden] { display: none; }
+  .assembly-match-note p {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .pref-elections__list {
+    display: grid;
+    gap: 16px;
+  }
+  .election-frame {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+  .election-frame__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    background: var(--beige-light);
+    border-bottom: 1px solid var(--line);
+  }
+  .election-frame__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.5;
+  }
+  .election-frame__count {
+    flex: 0 0 auto;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .election-frame__dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 0;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .election-frame__dates span { white-space: nowrap; }
+  .district-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+  }
+  .district-list li { min-width: 0; }
+  .district-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    padding: 10px;
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-decoration: none;
+  }
+  .district-list a::after {
+    flex: 0 0 auto;
+    content: "›";
+    color: var(--accent);
+    font-size: 22px;
+    line-height: 1;
+  }
+  .district-list a:hover {
+    background: var(--accent-soft);
+    color: #327494;
+  }
+  .district-list a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .district-list__municipality {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pref-elections__empty {
+    margin: 0;
+    padding: 24px;
+    background: var(--beige-light);
+    color: var(--muted);
+    text-align: center;
+  }
+  @media (max-width: 700px) {
+    .pref-elections__head { display: block; }
+    .pref-elections__summary { margin-top: 8px; white-space: normal; }
+    .municipality-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pref-assembly-direct { display: block; }
+    .pref-assembly-direct a { display: block; margin-top: 12px; text-align: center; }
+    .election-frame__head { align-items: flex-start; }
+    .district-list { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- 投票マッチング（出典: sangiin.go2senkyo.com/2025 の m_matching） ---------- */
+  .m_matching_inner {
+    max-width: 650px;
+    margin: 0 auto;
+  }
+  .m_matching_head {
+    padding: 25px 0;
+    border-top: 6px solid rgb(56 170 170 / .45);
+    border-bottom: 6px solid rgb(56 170 170 / .45);
+  }
+  .m_matching_head_subttl {
+    margin: 0;
+    padding: 0 30px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .m_matching_head_subttl .text {
+    display: inline-block;
+    position: relative;
+    font-size: 24px;
+  }
+  .m_matching_head_subttl .text::before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -70px;
+    top: -20px;
+    width: 62px;
+    height: 40px;
+    background: url(senkyo2027/img/cmn/icon_new.svg) no-repeat 50% / contain;
+  }
+  .m_matching_head_subttl .accent { color: var(--brand); }
+  .m_matching_head_subttl .accent .small { font-size: 21px; }
+  .m_matching_head_ttl { margin: 10px 0 0; }
+  .m_matching_head_ttl img {
+    display: block;
+    width: auto;
+    height: 72px;
+    margin: 0 auto;
+  }
+  .m_matching_body { margin-top: 30px; }
+  .m_matching_para {
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+  }
+  .m_matching_note {
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: center;
+  }
+  .m_page_link {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .m_page_link a {
+    display: block;
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background: #fff;
+    border: 2px solid var(--taupe);
+    border-radius: 50px;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color .2s, color .2s;
+  }
+  .m_page_link a:hover {
+    background: var(--taupe);
+    color: #fff;
+  }
+  .m_page_link a .text {
+    position: relative;
+    padding-right: 20px;
+  }
+  .m_page_link a .text::before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 55%;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  @media (max-width: 767px) {
+    .m_matching_head { padding: 20px 0; }
+    .m_matching_head_subttl { font-size: 18px; }
+    .m_matching_head_subttl .text { font-size: 22px; }
+    .m_matching_head_subttl .accent .small { font-size: 18px; }
+    .m_matching_head_subttl .text::before {
+      right: -50px;
+      top: -10px;
+      width: 40px;
+      height: 30px;
+    }
+    .m_matching_head_ttl img { height: 50px; }
+    .m_matching_para { font-size: 16px; }
+    .m_page_link { margin-top: 30px; }
+    .m_page_link a {
+      width: 77%;
+      min-width: 260px;
+      font-size: 19px;
+    }
+  }
+
+  /* ---------- about ---------- */
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+    gap: clamp(24px, 4vw, 44px);
+    align-items: start;
+  }
+  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+  .about__body p { margin: 0 0 16px; font-size: 15px; }
+  .about__body p:last-child { margin-bottom: 0; }
+  .about__body .marker {
+    background: linear-gradient(transparent 62%, #e6e0cd 62%);
+    font-weight: 700;
+  }
+  .facts {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 8px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .facts dl { margin: 0; }
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .facts div:last-child { border-bottom: none; }
+  .facts dt { font-size: 13px; color: var(--muted); font-weight: 700; }
+  .facts dd { margin: 0; font-size: 17px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+  .facts dd small { font-size: 12px; font-weight: 600; color: var(--muted); margin-left: 3px; }
+
+  /* ---------- cards ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s ease, box-shadow .2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card > a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+  .card--video .card__thumb::after {
+    content: "";
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / .92);
+    box-shadow: var(--shadow-sm);
+  }
+  .card--video .card__thumb::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    border-style: solid;
+    border-width: 9px 0 9px 15px;
+    border-color: transparent transparent transparent var(--brand);
+    transform: translateX(2px);
+  }
+  .card__tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    background: var(--brand);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: .04em;
+  }
+  .card--video .card__tag { background: var(--navy); }
+  .card__time {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    z-index: 2;
+    background: rgb(0 0 0 / .7);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .card { position: relative; }
+  .card:hover .card__title { color: var(--brand); }
+  .card__excerpt { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .card__meta {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 11.5px;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .more-wrap { margin-top: 28px; text-align: center; }
+
+  /* ---------- movie slider ---------- */
+  .movie-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .movie-dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .movie-dates a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--text);
+    background: var(--surface);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .movie-dates a:hover { border-color: var(--brand); color: var(--brand); }
+  .movie-dates a[aria-current="true"] {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+  }
+  .movie-slider-controls {
+    display: flex;
+    gap: 8px;
+  }
+  .movie-slider-controls button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .movie-slider-controls button:hover { background: var(--brand-soft); border-color: var(--brand); }
+  .movie-slider-controls button:disabled {
+    opacity: .35;
+    cursor: default;
+  }
+  .movie-slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 8px 4px 18px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 4px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .movie-slider { scroll-behavior: smooth; }
+  }
+  .movie-slide {
+    flex: 0 0 min(640px, 82%);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    container-type: scroll-state;
+  }
+  .movie-slide__meta {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .movie-embed {
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .movie-embed--soon {
+    display: grid;
+    place-items: center;
+    background: #9a9a9a;
+    color: #fff;
+    border-color: #9a9a9a;
+  }
+  .movie-embed--soon span {
+    font-size: clamp(18px, 2.8vw, 28px);
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+  .movie-embed iframe,
+  .movie-embed img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+  @supports (container-type: scroll-state) {
+    @media (prefers-reduced-motion: no-preference) {
+      @container scroll-state(snapped: x) {
+        .movie-embed { box-shadow: 0 10px 28px rgb(0 0 0 / .28); }
+      }
+    }
+  }
+  table.sched a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  table.sched a:hover { color: var(--brand); }
+
+  /* ---------- faq ---------- */
+  .faq { display: grid; gap: 10px; }
+  .faq details {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .faq details[open] { border-color: var(--taupe); box-shadow: var(--shadow-sm); }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 52px 16px 18px;
+    font-weight: 700;
+    font-size: 15px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 24px;
+    width: 9px;
+    height: 9px;
+    border-right: 2.5px solid var(--brand);
+    border-bottom: 2.5px solid var(--brand);
+    transform: rotate(45deg);
+    transition: transform .22s ease;
+  }
+  .faq details[open] summary::after { transform: rotate(-135deg); top: 27px; }
+  .faq summary:hover { background: var(--beige-light); }
+  .faq__answer {
+    padding: 0 18px 18px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.85;
+    margin: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+
+  /* ---------- cta band ---------- */
+  .cta-band {
+    background: linear-gradient(105deg, var(--brand), #2d8c8c);
+    color: #fff;
+    text-align: center;
+    padding: clamp(40px, 6vw, 66px) 0;
+  }
+  .cta-band h2 { margin: 0 0 12px; font-size: clamp(21px, 3.2vw, 30px); font-weight: 800; }
+  .cta-band p { margin: 0 0 24px; font-size: 14.5px; color: rgb(255 255 255 / .9); }
+  .cta-band .btn--outline { color: var(--brand); }
+
+  /* ---------- シェア帯（m_page_bottom / m_sharePage） ---------- */
+  .m_page_bottom { margin: 50px 0 0; }
+  .m_sharePage { padding: 50px 0; text-align: center; }
+  .m_sharePage_ttl {
+    margin: 0;
+    font-size: 18px;
+    display: inline-block;
+    padding: 0 30px;
+    color: var(--brand);
+    font-weight: 700;
+    position: relative;
+  }
+  .m_sharePage_ttl::before, .m_sharePage_ttl::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 30px;
+    background-color: var(--brand);
+    position: absolute;
+    top: 0;
+  }
+  .m_sharePage_ttl::before { left: 0; transform: rotate(-40deg); }
+  .m_sharePage_ttl::after { right: 0; transform: rotate(40deg); }
+  .m_sharePage_links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  .m_sharePage_links_btn { width: 30px; }
+  .m_sharePage_links_btn a, .m_sharePage_links_btn button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .m_sharePage_links_btn a:hover, .m_sharePage_links_btn button:hover { opacity: .6; }
+  .m_sharePage_note { margin: 18px 0 0; font-size: 12px; color: var(--muted); }
+  .m_sharePage_note[hidden] { display: none; }
+
+  @media (max-width: 767px) {
+    .m_sharePage_links { gap: 24px; }
+  }
+
+  /* ---------- footer（m_foot / 出典: shugiin.go2senkyo.com/51） ---------- */
+  .m_foot {
+    border-top: 1px solid #000;
+    text-align: center;
+    background-color: var(--foot-bg);
+    padding: 80px 0;
+  }
+  .m_foot_inner { width: 94%; margin: auto; }
+  .m_foot_link {
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid #000;
+    width: 350px;
+    margin: 0 auto;
+    padding: 15px 5px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .m_foot_link a { color: #000; text-decoration: none; display: block; }
+  .m_foot_link a:hover { text-decoration: underline; }
+  .m_foot_logo { width: 140px; margin: 40px auto auto; }
+  .m_foot_logo a { display: block; }
+  .m_foot_copy { font-size: 10px; margin-top: 10px; }
+  .m_foot_gototop {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 45px;
+    height: 45px;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity .5s, transform .3s;
+    backface-visibility: hidden;
+  }
+  .m_foot_gototop.on { opacity: 1; transform: translateY(0); }
+  .m_foot_gototop a { display: block; }
+
+  @media screen and (max-width: 979px) {
+    .m_foot { padding: 60px 0 100px; }
+    .m_foot_logo { width: 100px; }
+    .m_foot_gototop { right: 10px; bottom: calc(var(--nav-h) + 12px); }
+  }
+
+  @media screen and (max-width: 767px) {
+    .m_foot_link { font-size: 13px; width: 240px; }
+    .m_foot_gototop { width: 40px; height: 40px; }
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      transition-duration: .01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<!-- ========== 共通ヘッダー（後日、共通コンポーネントに差し替え） ここから ========== -->
+<header class="m_head">
+  <div class="m_head_inner">
+    <div class="m_head_left">
+      <a class="m_head_logo" href="#top">
+        <span class="m_head_logo_image">
+          <img src="senkyo2027/img/cmn/icon_senkyocom_small.svg" alt="選挙ドットコム" />
+        </span>
+        <span class="m_head_logo_para bold">
+          <span class="small">第21回</span><span class="big">統一地方選挙</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="m_head_right">
+      <ul class="m_nav_list pc medium">
+        <li>
+          <button class="link" type="button" data-open-search>
+            <span class="icon sp"><img src="senkyo2027/img/cmn/icon_japan.svg" alt="" /></span>
+            <span class="text">選挙区</span>
+          </button>
+        </li>
+        <li>
+          <a href="#matching">
+            <span class="icon sp"><img src="senkyo2027/img/cmn/icon_matching.svg" alt="" /></span>
+            <span class="text">投票マッチング</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://go2senkyo.com/login" target="_blank" rel="noopener noreferrer">
+            <span class="icon"><img src="senkyo2027/img/cmn/icon_login.svg" alt="" /></span>
+            <span class="text">MY選挙</span>
+          </a>
+        </li>
+      </ul>
+
+      <button class="m_head_btn_outer" type="button" data-menu-btn
+              aria-label="メニューを開く" aria-expanded="false" aria-controls="head-nav">
+        <span class="m_head_btn" data-menu-icon aria-current="false" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="m_head_nav" id="head-nav" aria-current="false" aria-label="グローバルナビゲーション">
+  <ul class="m_head_nav_list">
+    <li>
+      <button class="link" type="button" data-open-search>選挙区</button>
+    </li>
+    <li>
+      <a href="#matching">投票マッチング</a>
+    </li>
+    <li>
+      <a href="https://go2senkyo.com/login" target="_blank" rel="noopener noreferrer">My選挙</a>
+    </li>
+  </ul>
+  <div class="m_head_nav_footer">
+    <p class="m_head_nav_link">
+      <a href="https://go2senkyo.com/login" target="_blank" rel="noopener noreferrer">
+        <span class="logo"><img src="senkyo2027/img/cmn/icon_senkyocom.svg" alt="選挙ドットコム" /></span>
+        <span>ログイン</span>
+      </a>
+    </p>
+    <p class="m_head_nav_link">
+      <a href="https://ichi-ni.jp/recruit/" target="_blank" rel="noopener noreferrer">
+        選挙ドットコムでは<br class="sp" />一緒に働くスタッフを募集！
+      </a>
+    </p>
+    <ul class="m_head_sublist">
+      <li><a href="https://www.facebook.com/thesenkyo/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
+      </a></li>
+      <li><a href="https://x.com/go2senkyo" target="_blank" rel="noopener noreferrer" aria-label="X（旧Twitter）">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-6l-4.7-6.1L5.6 21h-3l7-8L2.5 3h6.2l4.2 5.6L17.5 3zm-1 16h1.6L7.6 4.7H5.9L16.5 19z"/></svg>
+      </a></li>
+      <li><a href="https://www.youtube.com/channel/UCpdtHm6VFP_Qc-IDIsyLh1A" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 00-1.8 1.8A26 26 0 002 12a26 26 0 00.4 4.8 2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8A26 26 0 0022 12a26 26 0 00-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg>
+      </a></li>
+    </ul>
+  </div>
+</nav>
+<!-- ========== 共通ヘッダー ここまで ========== -->
+
+<dialog class="search-dialog" id="search-dialog" aria-labelledby="search-dialog-title">
+  <div class="search-dialog__head">
+    <h2 id="search-dialog-title">選挙を探す</h2>
+    <button class="search-dialog__close" type="button" id="search-dialog-close" aria-label="閉じる">×</button>
+  </div>
+  <div class="search-dialog__body">
+    <div>
+      <h3>都道府県から探す</h3>
+      <p class="hint">47都道府県の一覧から、お住まいの地域を選べます。</p>
+      <a class="btn-sm btn-sm--wide" style="display:block;text-align:center;text-decoration:none;" href="#area" data-close-dialog>都道府県一覧を見る</a>
+    </div>
+  </div>
+</dialog>
+
+<main id="main">
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="top">
+    <div class="inner hero__inner">
+      <div>
+        <h1 class="hero__title">
+          <span class="times">第21回</span>
+          <span class="main">統一地方選挙</span>
+        </h1>
+        <p class="hero__catch">あなたのお住まいの地域の選挙がわかる。</p>
+        <div class="hero__actions">
+          <a class="btn btn--outline" href="#area">開催選挙を探す</a>
+          <a class="btn btn--ghost" href="#matching">投票マッチングをする</a>
+        </div>
+      </div>
+
+      <div class="countdown">
+        <p class="countdown__label">前半戦 投票日まで</p>
+        <p class="countdown__target">2027年4月11日（日）</p>
+        <div class="countdown__units" id="countdown" aria-live="off">
+          <p class="countdown__unit"><span class="countdown__num" id="cd-days">--</span><span class="countdown__cap">日</span></p>
+          <p class="countdown__unit"><span class="countdown__num" id="cd-hours">--</span><span class="countdown__cap">時間</span></p>
+          <p class="countdown__unit"><span class="countdown__num" id="cd-mins">--</span><span class="countdown__cap">分</span></p>
+          <p class="countdown__unit"><span class="countdown__num" id="cd-secs">--</span><span class="countdown__cap">秒</span></p>
+        </div>
+        <p class="countdown__note">※日程は想定です。統一地方選挙の期日は特例法の成立により正式に決定します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 統一地方選挙とは ========== -->
+  <section class="section" id="about">
+    <div class="inner">
+      <div class="section__head">
+        <span class="section__label">ABOUT</span>
+        <h2 class="section__title">統一地方選挙とは</h2>
+      </div>
+
+      <div class="about">
+        <div class="about__body">
+          <p>
+            「統一地方選挙」とは、<span class="marker">全国の地方自治体の首長と議会議員の選挙期日を統一して一斉に行う、4年に1度の大型選挙</span>のことです。
+            全国で選挙期間や投票日を集中させることで、有権者の選挙への関心を高め、投票率の向上を図ることを目的として戦後に始まりました。2027年で21回目を迎えます。
+          </p>
+          <p>
+            投票日は2回に分けられ、知事選挙や道府県議会議員選挙などが「前半戦」、市区町村の首長や議会議員の選挙が「後半戦」と呼ばれます。
+            現職首長の辞職や議会の解散などによって統一地方選挙で行われる選挙の数は年々減少傾向にありますが、それでも全国で約1,000の選挙がこの期間に集中します。
+          </p>
+          <p>
+            国政政党にとって、全国の地方議員の数は党勢を左右する重要な指標です。国政選挙と同じように重視され、多くの候補者が擁立されます。
+            なお「統一」といっても全ての地方選挙が対象になるわけではなく、全国の地方選挙のうち今回行われる選挙の割合（統一率）は約27%です。
+          </p>
+        </div>
+
+        <div class="facts reveal">
+          <dl>
+            <div><dt>実施回数</dt><dd>第21<small>回</small></dd></div>
+            <div><dt>実施サイクル</dt><dd>4<small>年に1度</small></dd></div>
+            <div><dt>投票日</dt><dd>2<small>回（前半・後半）</small></dd></div>
+            <div><dt>対象となる選挙</dt><dd>約1,000<small>件</small></dd></div>
+            <div><dt>統一率</dt><dd>約27<small>%</small></dd></div>
+            <div><dt>投票できる年齢</dt><dd>18<small>歳以上</small></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 選挙日程 ========== -->
+  <section class="section section--tint" id="schedule">
+    <div class="inner">
+      <div class="section__head">
+        <span class="section__label">SCHEDULE</span>
+        <h2 class="section__title">選挙日程</h2>
+        <p class="section__desc">統一地方選挙は「前半戦」と「後半戦」の2つの投票日に分かれています。ご自身の地域がどちらに該当するかを確認しましょう。</p>
+      </div>
+
+      <div class="schedule">
+        <div class="sched-card sched-card--first reveal">
+          <div class="sched-card__head">
+            <h3 class="sched-card__title">前半戦</h3>
+            <span class="sched-card__vote">投票日 4/11（日）</span>
+          </div>
+          <div class="sched-card__body">
+            <table class="sched">
+              <thead>
+                <tr><th scope="col">選挙区分</th><th scope="col">告示日</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">道府県知事</th><td class="date"><a href="#movie-2027-03-25" data-movie-date="2027-03-25">3/25 <span>（木）</span></a></td></tr>
+                <tr><th scope="row">政令指定都市市長</th><td class="date"><a href="#movie-2027-03-28" data-movie-date="2027-03-28">3/28 <span>（日）</span></a></td></tr>
+                <tr><th scope="row">道府県議会議員</th><td class="date"><a href="#movie-2027-04-02" data-movie-date="2027-04-02">4/2 <span>（金）</span></a></td></tr>
+                <tr><th scope="row">政令指定都市議会議員</th><td class="date"><a href="#movie-2027-04-02" data-movie-date="2027-04-02">4/2 <span>（金）</span></a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="sched-card sched-card--second reveal">
+          <div class="sched-card__head">
+            <h3 class="sched-card__title">後半戦</h3>
+            <span class="sched-card__vote">投票日 4/25（日）</span>
+          </div>
+          <div class="sched-card__body">
+            <table class="sched">
+              <thead>
+                <tr><th scope="col">選挙区分</th><th scope="col">告示日</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">市区長</th><td class="date"><a href="#movie-2027-04-18" data-movie-date="2027-04-18">4/18 <span>（日）</span></a></td></tr>
+                <tr><th scope="row">市区議会議員</th><td class="date"><a href="#movie-2027-04-18" data-movie-date="2027-04-18">4/18 <span>（日）</span></a></td></tr>
+                <tr><th scope="row">町村長</th><td class="date"><a href="#movie-2027-04-20" data-movie-date="2027-04-20">4/20 <span>（火）</span></a></td></tr>
+                <tr><th scope="row">町村議会議員</th><td class="date"><a href="#movie-2027-04-20" data-movie-date="2027-04-20">4/20 <span>（火）</span></a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <p class="note">
+        ※本ページの日程は過去の統一地方選挙の実施パターンに基づく想定です。正式な期日は「地方公共団体の議会の議員及び長の選挙期日等の臨時特例に関する法律」の成立をもって確定します。<br>
+        ※期日前投票は、告示日の翌日から投票日の前日まで行うことができます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== 地域から探す ========== -->
+  <section class="section" id="area">
+    <div class="inner">
+      <div class="m_map_outer reveal">
+        <h3 class="m_map_ttl">自治体から探す</h3>
+        <p class="m_map_lead">都道府県をクリックすると、該当する選挙区をご覧いただけます</p>
+
+        <div class="m_map_wrapp">
+          <div class="m_map_inner">
+            <div class="m_map" id="pref-map">
+              <div class="hokkaidou is-wide is-tall"><a href="#area" data-pref="北海道">北海道</a></div>
+              <div class="aomori is-wide"><a href="#area" data-pref="青森県">青森</a></div>
+              <div class="iwate"><a href="#area" data-pref="岩手県">岩手</a></div>
+              <div class="akita"><a href="#area" data-pref="秋田県">秋田</a></div>
+              <div class="miyagi"><a href="#area" data-pref="宮城県">宮城</a></div>
+              <div class="yamagata"><a href="#area" data-pref="山形県">山形</a></div>
+              <div class="fukushima is-wide"><a href="#area" data-pref="福島県">福島</a></div>
+              <div class="niigata"><a href="#area" data-pref="新潟県">新潟</a></div>
+              <div class="toyama"><a href="#area" data-pref="富山県">富山</a></div>
+              <div class="ishikawa"><a href="#area" data-pref="石川県">石川</a></div>
+              <div class="tochigi"><a href="#area" data-pref="栃木県">栃木</a></div>
+              <div class="gunma"><a href="#area" data-pref="群馬県">群馬</a></div>
+              <div class="nagano is-tall"><a href="#area" data-pref="長野県">長野</a></div>
+              <div class="gifu is-tall"><a href="#area" data-pref="岐阜県">岐阜</a></div>
+              <div class="fukui"><a href="#area" data-pref="福井県">福井</a></div>
+              <div class="ibaraki"><a href="#area" data-pref="茨城県">茨城</a></div>
+              <div class="saitama"><a href="#area" data-pref="埼玉県">埼玉</a></div>
+              <div class="shiga"><a href="#area" data-pref="滋賀県">滋賀</a></div>
+              <div class="kyoto"><a href="#area" data-pref="京都府">京都</a></div>
+              <div class="hyogo"><a href="#area" data-pref="兵庫県">兵庫</a></div>
+              <div class="tottori"><a href="#area" data-pref="鳥取県">鳥取</a></div>
+              <div class="shimane"><a href="#area" data-pref="島根県">島根</a></div>
+              <div class="yamaguchi is-tall"><a href="#area" data-pref="山口県">山口</a></div>
+              <div class="chiba is-tall"><a href="#area" data-pref="千葉県">千葉</a></div>
+              <div class="tokyo"><a href="#area" data-pref="東京都">東京</a></div>
+              <div class="yamanashi"><a href="#area" data-pref="山梨県">山梨</a></div>
+              <div class="aichi"><a href="#area" data-pref="愛知県">愛知</a></div>
+              <div class="mie"><a href="#area" data-pref="三重県">三重</a></div>
+              <div class="nara"><a href="#area" data-pref="奈良県">奈良</a></div>
+              <div class="osaka"><a href="#area" data-pref="大阪府">大阪</a></div>
+              <div class="okayama"><a href="#area" data-pref="岡山県">岡山</a></div>
+              <div class="hiroshima"><a href="#area" data-pref="広島県">広島</a></div>
+              <div class="ohita"><a href="#area" data-pref="大分県">大分</a></div>
+              <div class="fukuoka"><a href="#area" data-pref="福岡県">福岡</a></div>
+              <div class="saga"><a href="#area" data-pref="佐賀県">佐賀</a></div>
+              <div class="kanagawa"><a href="#area" data-pref="神奈川県">神奈川</a></div>
+              <div class="sizuoka"><a href="#area" data-pref="静岡県">静岡</a></div>
+              <div class="wakayama is-wide"><a href="#area" data-pref="和歌山県">和歌山</a></div>
+              <div class="kagawa"><a href="#area" data-pref="香川県">香川</a></div>
+              <div class="ehime"><a href="#area" data-pref="愛媛県">愛媛</a></div>
+              <div class="miyazaki"><a href="#area" data-pref="宮崎県">宮崎</a></div>
+              <div class="kumamoto"><a href="#area" data-pref="熊本県">熊本</a></div>
+              <div class="nagasaki"><a href="#area" data-pref="長崎県">長崎</a></div>
+              <div class="tokushima"><a href="#area" data-pref="徳島県">徳島</a></div>
+              <div class="kochi"><a href="#area" data-pref="高知県">高知</a></div>
+              <div class="kagoshima is-wide"><a href="#area" data-pref="鹿児島県">鹿児島</a></div>
+              <div class="okinawa"><a href="#area" data-pref="沖縄県">沖縄</a></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:22px;">※選挙区の情報は各選挙管理委員会の発表をもとに順次掲載します。</p>
+      </div>
+
+      <section class="pref-elections" id="pref-elections" aria-labelledby="pref-elections-title" hidden>
+        <div class="pref-elections__head">
+          <div>
+            <h3 class="pref-elections__title" id="pref-elections-title"></h3>
+          </div>
+          <p class="pref-elections__summary" id="pref-elections-summary" aria-live="polite"></p>
+        </div>
+
+        <div class="municipality-picker" id="municipality-picker">
+          <label class="municipality-search">
+            <span>市区町村名から絞り込む</span>
+            <input type="search" id="municipality-search" placeholder="例：横浜市、世田谷区" autocomplete="off" />
+          </label>
+          <ul class="municipality-list" id="municipality-list"></ul>
+          <p class="municipality-list__empty" id="municipality-list-empty" hidden>
+            該当する市区町村が見つかりませんでした。
+          </p>
+          <div class="pref-assembly-direct" id="pref-assembly-direct" hidden>
+            <div>
+              <strong id="pref-assembly-direct-title"></strong>
+              <span>市区町村を選ばず、都道府県議会の選挙区一覧から直接探せます。</span>
+            </div>
+            <a href="#" id="pref-assembly-direct-link">選挙区一覧を見る</a>
+          </div>
+        </div>
+
+        <div class="municipality-result" id="municipality-result" hidden>
+          <button class="area-back" type="button" id="municipality-back">← 市区町村を選び直す</button>
+          <div class="municipality-result__head">
+            <h4 id="municipality-result-title"></h4>
+          </div>
+          <div class="election-category" id="local-election-category">
+            <div class="election-category__head">
+              <span class="election-category__number">1</span>
+              <div>
+                <h5>市区町村の選挙</h5>
+                <p>市区町村議会議員選挙・首長選挙</p>
+              </div>
+            </div>
+            <div class="pref-elections__list" id="local-election-list"></div>
+            <p class="election-category__empty" id="local-election-empty" hidden>
+              この市区町村の選挙情報は登録されていません。
+            </p>
+          </div>
+          <div class="election-category" id="assembly-election-category">
+            <div class="election-category__head">
+              <span class="election-category__number">2</span>
+              <div>
+                <h5 id="assembly-category-title">都道府県議会の選挙区</h5>
+                <p>選択した市区町村に該当する選挙区</p>
+              </div>
+            </div>
+            <div class="pref-elections__list" id="assembly-election-list"></div>
+            <div class="assembly-match-note" id="assembly-match-note" hidden>
+              <p>選挙区名から該当区を特定できないため、一覧から選択してください。</p>
+              <button type="button" id="show-all-assembly">都道府県議会の選挙区一覧を見る</button>
+            </div>
+            <p class="election-category__empty" id="assembly-election-empty" hidden>
+              この都道府県の議会議員選挙情報は登録されていません。
+            </p>
+          </div>
+        </div>
+
+        <p class="pref-elections__empty" id="pref-elections-empty" hidden>
+          この都道府県の選挙情報は現在準備中です。
+        </p>
+      </section>
+    </div>
+  </section>
+
+  <!-- ========== 投票マッチング ========== -->
+  <section class="section section--tint" id="matching">
+    <div class="inner">
+      <div class="m_matching reveal">
+        <div class="m_matching_inner">
+          <div class="m_matching_head">
+            <p class="m_matching_head_subttl">
+              <span class="text"><span class="accent"><span class="small">投票マッチング</span>Quick</span>が登場</span>
+            </p>
+            <h2 class="m_matching_head_ttl">
+              <img src="senkyo2027/img/cmn/matching_ttl.svg" alt="投票マッチング" loading="lazy" width="433" height="73" />
+            </h2>
+          </div>
+          <div class="m_matching_body">
+            <p class="m_matching_para">あなたと考えが近い政党がわかる！<br />会員登録でマッチング履歴を保存できる！</p>
+            <p class="m_matching_note">統一地方選挙の争点をもとにした設問に回答すると、あなたの考えに近い政党をマッチング率で確認できます。</p>
+          </div>
+        </div>
+        <div class="m_page_link">
+          <a href="https://votematches.go2senkyo.com/" target="_blank" rel="noopener noreferrer">
+            <span class="text">投票マッチングを始める</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 初めての選挙 ========== -->
+  <section class="section" id="learn">
+    <div class="inner">
+      <div class="section__head">
+        <span class="section__label">BASIC KNOWLEDGE</span>
+        <h2 class="section__title">初めての選挙</h2>
+      </div>
+
+      <ul class="cards">
+        <li>
+          <article class="card reveal">
+            <a href="https://go2senkyo.com/beginner/detail10/" target="_blank" rel="noopener noreferrer">
+              <div class="card__thumb">
+                <img src="senkyo2027/img/top/beginner1.jpg" alt="" width="1200" height="600" loading="lazy" />
+              </div>
+              <div class="card__body">
+                <h3 class="card__title">政治家は寄付が禁止されているって本当？【公職選挙法における寄付の禁止】</h3>
+              </div>
+            </a>
+          </article>
+        </li>
+        <li>
+          <article class="card reveal">
+            <a href="https://go2senkyo.com/beginner/detail7/" target="_blank" rel="noopener noreferrer">
+              <div class="card__thumb">
+                <img src="senkyo2027/img/top/beginner2.jpg" alt="" width="1200" height="600" loading="lazy" />
+              </div>
+              <div class="card__body">
+                <h3 class="card__title">街頭演説はうるさい！？ 公職選挙法上の決まりは？【街頭演説のルールとマナー】</h3>
+              </div>
+            </a>
+          </article>
+        </li>
+        <li>
+          <article class="card reveal">
+            <a href="https://go2senkyo.com/beginner/detail2/" target="_blank" rel="noopener noreferrer">
+              <div class="card__thumb">
+                <img src="senkyo2027/img/top/beginner3.jpg" alt="" width="1200" height="600" loading="lazy" />
+              </div>
+              <div class="card__body">
+                <h3 class="card__title">選挙のことを決めている法律ってどんなもの？【公職選挙法とは】</h3>
+              </div>
+            </a>
+          </article>
+        </li>
+      </ul>
+
+      <div class="more-wrap">
+        <a class="btn btn--outline" href="https://go2senkyo.com/beginner/" target="_blank" rel="noopener noreferrer">もっと見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 特集動画 ========== -->
+  <section class="section section--tint" id="movie">
+    <div class="inner">
+      <div class="section__head">
+        <span class="section__label">MOVIE</span>
+        <h2 class="section__title">統一地方選挙 特集動画</h2>
+      </div>
+
+      <div class="movie-toolbar">
+        <nav class="movie-dates" aria-label="告示日">
+          <a href="#movie-soon" data-movie-date="soon">準備中</a>
+          <a href="#movie-2027-03-25" data-movie-date="2027-03-25">3/25 道府県知事</a>
+          <a href="#movie-2027-03-28" data-movie-date="2027-03-28">3/28 政令市長</a>
+          <a href="#movie-2027-04-02" data-movie-date="2027-04-02">4/2 道府県議・政令市議</a>
+          <a href="#movie-2027-04-18" data-movie-date="2027-04-18">4/18 市区</a>
+          <a href="#movie-2027-04-20" data-movie-date="2027-04-20">4/20 町村</a>
+        </nav>
+        <div class="movie-slider-controls">
+          <button type="button" data-movie-prev aria-label="前の告示日">‹</button>
+          <button type="button" data-movie-next aria-label="次の告示日">›</button>
+        </div>
+      </div>
+
+      <div class="movie-slider" id="movie-slider" tabindex="0" aria-label="告示日ごとの特集動画">
+        <article class="movie-slide" id="movie-soon" data-movie-date="soon">
+          <p class="movie-slide__meta">特集動画・準備中</p>
+          <div class="movie-embed movie-embed--soon" role="img" aria-label="特集動画は順次公開予定です">
+            <span>順次公開予定</span>
+          </div>
+        </article>
+        <article class="movie-slide" id="movie-2027-03-25" data-movie-date="2027-03-25">
+          <p class="movie-slide__meta">告示日 3/25（木）・道府県知事</p>
+          <div class="movie-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </article>
+        <article class="movie-slide" id="movie-2027-03-28" data-movie-date="2027-03-28">
+          <p class="movie-slide__meta">告示日 3/28（日）・政令指定都市市長</p>
+          <div class="movie-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </article>
+        <article class="movie-slide" id="movie-2027-04-02" data-movie-date="2027-04-02">
+          <p class="movie-slide__meta">告示日 4/2（金）・道府県議会議員 / 政令指定都市議会議員</p>
+          <div class="movie-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </article>
+        <article class="movie-slide" id="movie-2027-04-18" data-movie-date="2027-04-18">
+          <p class="movie-slide__meta">告示日 4/18（日）・市区長 / 市区議会議員</p>
+          <div class="movie-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </article>
+        <article class="movie-slide" id="movie-2027-04-20" data-movie-date="2027-04-20">
+          <p class="movie-slide__meta">告示日 4/20（火）・町村長 / 町村議会議員</p>
+          <div class="movie-embed">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="section" id="faq">
+    <div class="inner" style="max-width:840px;">
+      <div class="section__head section__head--center">
+        <span class="section__label">FAQ</span>
+        <h2 class="section__title">よくある質問</h2>
+      </div>
+
+      <div class="faq">
+        <details name="faq" open>
+          <summary>投票するために必要なものはありますか？</summary>
+          <p class="faq__answer">
+            自宅に届く「投票所入場整理券」を持参するとスムーズですが、紛失した場合や届いていない場合でも、本人確認ができれば投票できます。
+            投票所で係員にその旨を伝えてください。
+          </p>
+        </details>
+        <details name="faq">
+          <summary>投票日に予定があって行けません。どうすればいいですか？</summary>
+          <p class="faq__answer">
+            告示日の翌日から投票日の前日までの間、市区町村が設置する期日前投票所で投票できます。
+            仕事・旅行・冠婚葬祭などの理由があれば利用でき、事前の申請は不要です。滞在先から投票する「不在者投票」の制度もあります。
+          </p>
+        </details>
+        <details name="faq">
+          <summary>引っ越しをした場合、どこで投票できますか？</summary>
+          <p class="faq__answer">
+            原則として、引っ越し先の市区町村に転入届を出してから3か月以上経過していることが、その地域で投票する条件になります。
+            条件を満たさない場合は、前の住所地で投票できる場合があります。詳しくはお住まいの選挙管理委員会にご確認ください。
+          </p>
+        </details>
+        <details name="faq">
+          <summary>「統一率」とは何ですか？</summary>
+          <p class="faq__answer">
+            全国の地方選挙のうち、統一地方選挙の期日にあわせて実施される選挙の割合のことです。
+            首長の辞職や議会の解散などで任期がずれると統一日程から外れるため、統一率は回を追うごとに低下し、近年は約27%程度で推移しています。
+          </p>
+        </details>
+        <details name="faq">
+          <summary>候補者の情報はどこで確認できますか？</summary>
+          <p class="faq__answer">
+            告示日以降、本サイトの「地域から探す」から各選挙のページで候補者一覧をご覧いただけます。
+            あわせて、市区町村から配布される「選挙公報」や各選挙管理委員会のウェブサイトでも確認できます。
+          </p>
+        </details>
+        <details name="faq">
+          <summary>SNSで候補者を応援してもいいですか？</summary>
+          <p class="faq__answer">
+            有権者もインターネットを使った選挙運動（ウェブサイト・SNS・動画等）を行うことができます。
+            ただし、電子メールを使った選挙運動は候補者・政党等に限られています。また、18歳未満の方は選挙運動を行うことができません。
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-band">
+    <div class="inner">
+      <h2>4月11日・4月25日は、投票へ。</h2>
+      <p>あなたの1票が、これからの4年間のまちを決めます。</p>
+      <a class="btn btn--outline" href="#area">自分の地域の選挙を確認する</a>
+    </div>
+  </section>
+</main>
+
+<div class="m_page_bottom">
+  <div class="m_sharePage">
+    <div class="inner">
+      <p class="m_sharePage_ttl">このページをシェアしよう</p>
+    </div>
+    <div class="m_sharePage_links">
+      <div class="m_sharePage_links_btn">
+        <a href="https://x.com/go2senkyo" target="_blank" rel="noopener noreferrer" aria-label="X（旧Twitter）">
+          <img src="senkyo2027/img/cmn/circle_twitter.png" alt="X" />
+        </a>
+      </div>
+      <div class="m_sharePage_links_btn">
+        <a href="https://www.facebook.com/thesenkyo/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <img src="senkyo2027/img/cmn/circle_fb.png" alt="Facebook" />
+        </a>
+      </div>
+      <div class="m_sharePage_links_btn">
+        <a href="https://www.youtube.com/channel/UCpdtHm6VFP_Qc-IDIsyLh1A" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <img src="senkyo2027/img/cmn/icon_youtube.svg" alt="YouTube" />
+        </a>
+      </div>
+      <div class="m_sharePage_links_btn">
+        <a href="https://line.me/R/share?text=" target="_blank" rel="noopener noreferrer" data-share="line">
+          <img src="senkyo2027/img/cmn/circle_line.png" alt="LINE" />
+        </a>
+      </div>
+      <div class="m_sharePage_links_btn">
+        <button type="button" id="share-copy" aria-label="リンクをコピー">
+          <img src="senkyo2027/img/cmn/circle_linkbtn.svg" alt="" />
+        </button>
+      </div>
+    </div>
+    <p class="m_sharePage_note" id="share-copied" role="status" hidden>リンクをコピーしました。</p>
+  </div>
+
+  <!-- ========== 共通フッター（後日、共通コンポーネントに差し替え） ここから ========== -->
+  <footer class="m_foot">
+    <div class="m_foot_inner">
+      <p class="m_foot_link">
+        <a href="https://ichi-ni.jp/recruit/" target="_blank" rel="noopener noreferrer">選挙ドットコムでは<br class="sp" />一緒に働くスタッフを募集！</a>
+      </p>
+      <p class="m_foot_logo">
+        <a href="https://go2senkyo.com/" target="_blank" rel="noopener noreferrer"><img src="senkyo2027/img/cmn/icon_senkyocom.svg" alt="選挙ドットコム" /></a>
+      </p>
+      <p class="m_foot_copy">© イチニ Inc. All rights reserved.</p>
+    </div>
+    <div class="m_foot_gototop" id="gototop">
+      <a href="#top" aria-label="ページの先頭へ戻る">
+        <img src="senkyo2027/img/cmn/gototop.svg" alt="" />
+      </a>
+    </div>
+  </footer>
+  <!-- ========== 共通フッター ここまで ========== -->
+</div>
+
+<nav class="m_nav" aria-label="サイトナビゲーション">
+  <ul class="m_nav_list medium">
+    <li>
+      <button class="link" type="button" data-open-search>
+        <span class="icon"><img src="senkyo2027/img/cmn/icon_japan.svg" alt="" /></span>
+        <span class="text">選挙区</span>
+      </button>
+    </li>
+    <li>
+      <a href="#matching">
+        <span class="icon"><img src="senkyo2027/img/cmn/icon_matching.svg" alt="" /></span>
+        <span class="text">投票マッチング</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://go2senkyo.com/login" target="_blank" rel="noopener noreferrer">
+        <span class="icon"><img src="senkyo2027/img/cmn/icon_login.svg" alt="" /></span>
+        <span class="text">MY選挙</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<script src="senkyo2027/election-districts-data.js"></script>
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- カウントダウン ---------- */
+  const target = new Date('2027-04-11T07:00:00+09:00');
+  const pad = (n) => String(n).padStart(2, '0');
+  const nodes = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs'),
+  };
+
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      Object.values(nodes).forEach((el) => { el.textContent = '0'; });
+      return false;
+    }
+    const s = Math.floor(diff / 1000);
+    nodes.days.textContent = Math.floor(s / 86400);
+    nodes.hours.textContent = pad(Math.floor(s / 3600) % 24);
+    nodes.mins.textContent = pad(Math.floor(s / 60) % 60);
+    nodes.secs.textContent = pad(s % 60);
+    return true;
+  }
+  if (tick()) setInterval(tick, 1000);
+
+  /* ---------- 特集動画スライダー（告示日連動） ---------- */
+  const movieSlider = document.getElementById('movie-slider');
+  const movieSlides = movieSlider ? [...movieSlider.querySelectorAll('.movie-slide')] : [];
+  const movieDateLinks = [...document.querySelectorAll('[data-movie-date]')];
+  const moviePrev = document.querySelector('[data-movie-prev]');
+  const movieNext = document.querySelector('[data-movie-next]');
+
+  const movieDateValue = (slide) => slide?.dataset.movieDate || '';
+
+  const noticeTime = (isoDate) => new Date(`${isoDate}T00:00:00+09:00`).getTime();
+
+  const currentNoticeIndex = () => {
+    const now = Date.now();
+    let index = 0;
+    movieSlides.forEach((slide, i) => {
+      const date = movieDateValue(slide);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
+      if (noticeTime(date) <= now) index = i;
+    });
+    return index;
+  };
+
+  const setMovieCurrent = (date) => {
+    document.querySelectorAll('.movie-dates [data-movie-date]').forEach((link) => {
+      if (link.dataset.movieDate === date) {
+        link.setAttribute('aria-current', 'true');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+    const index = movieSlides.findIndex((slide) => movieDateValue(slide) === date);
+    if (moviePrev) moviePrev.disabled = index <= 0;
+    if (movieNext) movieNext.disabled = index >= movieSlides.length - 1;
+  };
+
+  const goToMovieDate = (date, instant = false) => {
+    const slide = movieSlides.find((item) => movieDateValue(item) === date);
+    if (!slide || !movieSlider) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    movieSlider.scrollTo({
+      left: slide.offsetLeft - 4,
+      behavior: instant || reduce ? 'auto' : 'smooth',
+    });
+    setMovieCurrent(date);
+  };
+
+  if (movieSlider && movieSlides.length) {
+    const initialSlide = movieSlides[currentNoticeIndex()];
+    goToMovieDate(movieDateValue(initialSlide), true);
+
+    movieDateLinks.forEach((link) => {
+      if (link.tagName !== 'A') return;
+      link.addEventListener('click', (e) => {
+        const date = link.dataset.movieDate;
+        if (!date || !document.getElementById(`movie-${date}`)) return;
+        e.preventDefault();
+        goToMovieDate(date);
+        if (link.closest('#schedule')) {
+          document.getElementById('movie').scrollIntoView({ block: 'start' });
+        }
+      });
+    });
+
+    moviePrev?.addEventListener('click', () => {
+      const current = document.querySelector('.movie-dates [aria-current="true"]');
+      const index = Math.max(0, movieSlides.findIndex((slide) => movieDateValue(slide) === current?.dataset.movieDate) - 1);
+      goToMovieDate(movieDateValue(movieSlides[index]));
+    });
+
+    movieNext?.addEventListener('click', () => {
+      const current = document.querySelector('.movie-dates [aria-current="true"]');
+      const index = Math.min(
+        movieSlides.length - 1,
+        movieSlides.findIndex((slide) => movieDateValue(slide) === current?.dataset.movieDate) + 1
+      );
+      goToMovieDate(movieDateValue(movieSlides[index]));
+    });
+
+    const syncFromSnap = (slide) => {
+      if (slide?.dataset?.movieDate) setMovieCurrent(slide.dataset.movieDate);
+    };
+
+    if ('onscrollsnapchange' in HTMLElement.prototype) {
+      movieSlider.addEventListener('scrollsnapchange', (event) => {
+        syncFromSnap(event.snapTargetInline);
+      });
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (visible) syncFromSnap(visible.target);
+      }, { root: movieSlider, threshold: 0.6 });
+      movieSlides.forEach((slide) => observer.observe(slide));
+    }
+  }
+
+  /* ---------- 都道府県マップ ---------- */
+  const mapEl = document.getElementById('pref-map');
+  const prefElectionData = window.ELECTION_DISTRICTS_2027 || {};
+  const prefElectionsEl = document.getElementById('pref-elections');
+  const prefElectionsTitle = document.getElementById('pref-elections-title');
+  const prefElectionsSummary = document.getElementById('pref-elections-summary');
+  const prefElectionsEmpty = document.getElementById('pref-elections-empty');
+  const municipalityPicker = document.getElementById('municipality-picker');
+  const municipalitySearch = document.getElementById('municipality-search');
+  const municipalityList = document.getElementById('municipality-list');
+  const municipalityListEmpty = document.getElementById('municipality-list-empty');
+  const prefAssemblyDirect = document.getElementById('pref-assembly-direct');
+  const prefAssemblyDirectTitle = document.getElementById('pref-assembly-direct-title');
+  const prefAssemblyDirectLink = document.getElementById('pref-assembly-direct-link');
+  const municipalityResult = document.getElementById('municipality-result');
+  const municipalityResultTitle = document.getElementById('municipality-result-title');
+  const municipalityBack = document.getElementById('municipality-back');
+  const localElectionCategory = document.getElementById('local-election-category');
+  const localElectionList = document.getElementById('local-election-list');
+  const localElectionEmpty = document.getElementById('local-election-empty');
+  const assemblyCategoryTitle = document.getElementById('assembly-category-title');
+  const assemblyElectionList = document.getElementById('assembly-election-list');
+  const assemblyElectionEmpty = document.getElementById('assembly-election-empty');
+  const assemblyMatchNote = document.getElementById('assembly-match-note');
+  const showAllAssembly = document.getElementById('show-all-assembly');
+  let currentPrefName = '';
+
+  const formatElectionDate = (date) => {
+    const [year, month, day] = date.split('-').map(Number);
+    return new Intl.DateTimeFormat('ja-JP', {
+      month: 'numeric',
+      day: 'numeric',
+      weekday: 'short',
+    }).format(new Date(year, month - 1, day));
+  };
+
+  const renderElectionFrames = (container, entries) => {
+    container.replaceChildren();
+    const fragment = document.createDocumentFragment();
+
+    entries.forEach(({ election, districts: selectedDistricts }) => {
+      const frame = document.createElement('section');
+      frame.className = 'election-frame';
+
+      const head = document.createElement('div');
+      head.className = 'election-frame__head';
+
+      const title = document.createElement('h4');
+      title.className = 'election-frame__title';
+      title.textContent = election.name;
+
+      const count = document.createElement('span');
+      count.className = 'election-frame__count';
+      count.textContent = `${selectedDistricts.length}選挙区`;
+
+      const dates = document.createElement('p');
+      dates.className = 'election-frame__dates';
+
+      const noticeDate = document.createElement('span');
+      noticeDate.textContent = `告示日 ${formatElectionDate(election.noticeDate)}`;
+
+      const voteDate = document.createElement('span');
+      voteDate.textContent = `投票日 ${formatElectionDate(election.voteDate)}`;
+
+      const districts = document.createElement('ul');
+      districts.className = 'district-list';
+
+      selectedDistricts.forEach((district) => {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        const label = document.createElement('span');
+        const municipality = document.createElement('small');
+
+        link.href = district.url;
+        link.setAttribute('aria-label', `${election.name} ${district.name}のページを見る`);
+        label.textContent = district.name;
+
+        municipality.className = 'district-list__municipality';
+        municipality.textContent = `自治体：${district.municipality}`;
+
+        label.appendChild(municipality);
+        link.appendChild(label);
+        item.appendChild(link);
+        districts.appendChild(item);
+      });
+
+      head.append(title, count);
+      dates.append(noticeDate, voteDate);
+      frame.append(head, dates, districts);
+      fragment.appendChild(frame);
+    });
+
+    container.appendChild(fragment);
+  };
+
+  const setSelectedPref = (prefName) => {
+    mapEl.querySelectorAll('a[data-pref]').forEach((a) => {
+      if (a.dataset.pref === prefName) {
+        a.setAttribute('aria-current', 'location');
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const getPrefAssemblyEntries = (pref) => pref.elections
+    .map((election) => ({
+      election,
+      districts: election.districts.filter((district) =>
+        district.municipality === currentPrefName &&
+        /[都道府県]議会議員選挙/.test(election.name)
+      ),
+    }))
+    .filter(({ districts }) => districts.length);
+
+  const getMunicipalities = (pref) => {
+    const municipalities = new Map();
+    pref.elections.forEach((election) => {
+      election.districts.forEach((district) => {
+        if (district.municipality === currentPrefName) return;
+        if (!municipalities.has(district.municipality)) {
+          municipalities.set(district.municipality, new Set());
+        }
+        municipalities.get(district.municipality).add(election.id);
+      });
+    });
+    return [...municipalities.entries()]
+      .map(([name, electionIds]) => ({ name, count: electionIds.size }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+  };
+
+  const buildAreaUrl = ({ pref, municipality = '', view = '' }) => {
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.hash = '';
+    url.searchParams.set('pref', pref);
+    if (municipality) url.searchParams.set('municipality', municipality);
+    if (view) url.searchParams.set('view', view);
+    return `${url.pathname}${url.search}`;
+  };
+
+  const updateAreaUrl = (params) => {
+    window.history.replaceState(null, '', buildAreaUrl(params));
+  };
+
+  const renderMunicipalityPicker = (prefName) => {
+    const pref = prefElectionData[prefName];
+    currentPrefName = prefName;
+    setSelectedPref(prefName);
+    prefElectionsEl.hidden = false;
+    municipalityPicker.hidden = false;
+    municipalityResult.hidden = true;
+    prefElectionsEmpty.hidden = true;
+    municipalitySearch.value = '';
+    municipalityList.replaceChildren();
+
+    if (!pref || !pref.elections.length) {
+      prefElectionsTitle.textContent = `${prefName}の市区町村`;
+      prefElectionsSummary.textContent = '';
+      municipalityPicker.hidden = true;
+      prefElectionsEmpty.hidden = false;
+      return;
+    }
+
+    const municipalities = getMunicipalities(pref);
+    const assemblyEntries = getPrefAssemblyEntries(pref);
+    prefElectionsTitle.textContent = `${prefName}の市区町村を選ぶ`;
+    prefElectionsSummary.textContent =
+      `${municipalities.length.toLocaleString('ja-JP')}市区町村から選択`;
+
+    const fragment = document.createDocumentFragment();
+    municipalities.forEach((municipality) => {
+      const item = document.createElement('li');
+      item.dataset.name = municipality.name;
+
+      const link = document.createElement('a');
+      link.href = buildAreaUrl({ pref: prefName, municipality: municipality.name });
+      link.dataset.municipality = municipality.name;
+
+      const label = document.createElement('span');
+      label.textContent = municipality.name;
+
+      const count = document.createElement('span');
+      count.className = 'municipality-list__count';
+      count.textContent = `${municipality.count}件`;
+
+      link.append(label, count);
+      item.appendChild(link);
+      fragment.appendChild(item);
+    });
+    municipalityList.appendChild(fragment);
+    municipalityListEmpty.hidden = municipalities.length > 0;
+
+    prefAssemblyDirect.hidden = assemblyEntries.length === 0;
+    if (assemblyEntries.length) {
+      prefAssemblyDirectTitle.textContent = `${prefName}議会の選挙区から探す`;
+      prefAssemblyDirectLink.href = buildAreaUrl({ pref: prefName, view: 'assembly' });
+    }
+  };
+
+  const getLocalEntries = (pref, municipality) => pref.elections
+    .map((election) => ({
+      election,
+      districts: election.districts.filter((district) =>
+        district.municipality === municipality
+      ),
+    }))
+    .filter(({ districts }) => districts.length);
+
+  const normalizeAreaName = (value) =>
+    value.replace(/[\s　・･、,／/]/g, '').replace(/選挙区$|議会議員選挙$/g, '');
+
+  const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const getMatchedAssemblyEntries = (pref, municipality, localEntries) => {
+    const keys = new Set([normalizeAreaName(municipality)]);
+    localEntries.forEach(({ election, districts }) => {
+      districts.forEach((district) => {
+        if (district.name !== election.name) {
+          const key = normalizeAreaName(district.name);
+          if (key.length >= 2) keys.add(key);
+        }
+      });
+    });
+
+    return getPrefAssemblyEntries(pref)
+      .map(({ election, districts }) => ({
+        election,
+        districts: districts.filter((district) => {
+          const districtName = normalizeAreaName(district.name);
+          return [...keys].some((key) => {
+            const boundary = new RegExp(`(^|及び|ならびに|並びに)${escapeRegExp(key)}`);
+            return boundary.test(districtName);
+          });
+        }),
+      }))
+      .filter(({ districts }) => districts.length);
+  };
+
+  const renderMunicipalityResult = (prefName, municipality) => {
+    const pref = prefElectionData[prefName];
+    if (!pref) return;
+
+    currentPrefName = prefName;
+    setSelectedPref(prefName);
+    prefElectionsEl.hidden = false;
+    municipalityPicker.hidden = true;
+    municipalityResult.hidden = false;
+    prefElectionsEmpty.hidden = true;
+
+    const localEntries = getLocalEntries(pref, municipality);
+    const assemblyEntries = getPrefAssemblyEntries(pref);
+    const matchedAssemblyEntries =
+      getMatchedAssemblyEntries(pref, municipality, localEntries);
+
+    prefElectionsTitle.textContent = `${prefName}から選挙を探す`;
+    prefElectionsSummary.textContent = municipality;
+    municipalityResultTitle.textContent = `${municipality}で投票する選挙`;
+    assemblyCategoryTitle.textContent = `${prefName}議会の選挙区`;
+
+    localElectionCategory.hidden = false;
+    renderElectionFrames(localElectionList, localEntries);
+    localElectionEmpty.hidden = localEntries.length > 0;
+
+    renderElectionFrames(assemblyElectionList, matchedAssemblyEntries);
+    assemblyElectionEmpty.hidden = assemblyEntries.length > 0;
+    assemblyMatchNote.hidden =
+      assemblyEntries.length === 0 || matchedAssemblyEntries.length > 0;
+  };
+
+  const renderAllAssembly = (prefName) => {
+    const pref = prefElectionData[prefName];
+    if (!pref) return;
+
+    currentPrefName = prefName;
+    setSelectedPref(prefName);
+    prefElectionsEl.hidden = false;
+    municipalityPicker.hidden = true;
+    municipalityResult.hidden = false;
+    prefElectionsEmpty.hidden = true;
+
+    const assemblyEntries = getPrefAssemblyEntries(pref);
+    prefElectionsTitle.textContent = `${prefName}から選挙を探す`;
+    prefElectionsSummary.textContent = '都道府県議会';
+    municipalityResultTitle.textContent = `${prefName}議会の選挙区一覧`;
+    assemblyCategoryTitle.textContent = `${prefName}議会の選挙区`;
+    localElectionCategory.hidden = true;
+    assemblyMatchNote.hidden = true;
+    renderElectionFrames(assemblyElectionList, assemblyEntries);
+    assemblyElectionEmpty.hidden = assemblyEntries.length > 0;
+  };
+
+  if (mapEl && prefElectionsEl) {
+    mapEl.querySelectorAll('a[data-pref]').forEach((a) => {
+      a.setAttribute('aria-label', a.dataset.pref + 'の選挙を見る');
+      a.title = a.dataset.pref;
+      a.href = `?pref=${encodeURIComponent(a.dataset.pref)}`;
+    });
+
+    mapEl.addEventListener('click', (e) => {
+      const link = e.target.closest('a[data-pref]');
+      if (!link) return;
+      e.preventDefault();
+      renderMunicipalityPicker(link.dataset.pref);
+      updateAreaUrl({ pref: link.dataset.pref });
+      prefElectionsEl.scrollIntoView({ block: 'start' });
+    });
+
+    municipalityList.addEventListener('click', (e) => {
+      const link = e.target.closest('a[data-municipality]');
+      if (!link) return;
+      e.preventDefault();
+      renderMunicipalityResult(currentPrefName, link.dataset.municipality);
+      updateAreaUrl({ pref: currentPrefName, municipality: link.dataset.municipality });
+      prefElectionsEl.scrollIntoView({ block: 'start' });
+    });
+
+    municipalitySearch.addEventListener('input', () => {
+      const keyword = municipalitySearch.value.trim();
+      let visibleCount = 0;
+      municipalityList.querySelectorAll('li').forEach((item) => {
+        const visible = !keyword || item.dataset.name.includes(keyword);
+        item.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+      municipalityListEmpty.hidden = visibleCount > 0;
+    });
+
+    municipalityBack.addEventListener('click', () => {
+      renderMunicipalityPicker(currentPrefName);
+      updateAreaUrl({ pref: currentPrefName });
+      municipalitySearch.focus();
+    });
+
+    prefAssemblyDirectLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      renderAllAssembly(currentPrefName);
+      updateAreaUrl({ pref: currentPrefName, view: 'assembly' });
+      prefElectionsEl.scrollIntoView({ block: 'start' });
+    });
+
+    showAllAssembly.addEventListener('click', () => {
+      renderAllAssembly(currentPrefName);
+      updateAreaUrl({ pref: currentPrefName, view: 'assembly' });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const initialPref = params.get('pref');
+    const initialMunicipality = params.get('municipality');
+    const initialView = params.get('view');
+    if (initialPref && prefElectionData[initialPref]) {
+      if (initialMunicipality) {
+        renderMunicipalityResult(initialPref, initialMunicipality);
+      } else if (initialView === 'assembly') {
+        renderAllAssembly(initialPref);
+      } else {
+        renderMunicipalityPicker(initialPref);
+      }
+    }
+  }
+
+  /* ---------- ハンバーガーメニュー ---------- */
+  const headNav = document.getElementById('head-nav');
+  const menuBtns = document.querySelectorAll('[data-menu-btn]');
+
+  function isMenuOpen() {
+    return headNav.getAttribute('aria-current') === 'true';
+  }
+
+  const siteHead = document.querySelector('.m_head');
+
+  function setMenu(open) {
+    headNav.setAttribute('aria-current', String(open));
+    siteHead?.classList.toggle('is-menu-open', open);
+    menuBtns.forEach((btn) => {
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      btn.querySelector('[data-menu-icon]').setAttribute('aria-current', String(open));
+    });
+  }
+
+  menuBtns.forEach((btn) => {
+    btn.addEventListener('click', () => setMenu(!isMenuOpen()));
+  });
+
+  headNav.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setMenu(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) {
+      setMenu(false);
+      menuBtns[0].focus();
+    }
+  });
+
+  /* ---------- 地域から探す モーダル ---------- */
+  const dialog = document.getElementById('search-dialog');
+
+  document.querySelectorAll('[data-open-search]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setMenu(false);
+      dialog.showModal();
+    });
+  });
+
+  document.getElementById('search-dialog-close').addEventListener('click', () => dialog.close());
+
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog || e.target.closest('[data-close-dialog]')) dialog.close();
+  });
+
+  /* ---------- シェア ---------- */
+  const shareUrl = location.href.split('#')[0];
+  const shareText = document.title;
+
+  const shareEndpoints = {
+    line: `https://line.me/R/share?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`,
+  };
+
+  document.querySelectorAll('[data-share]').forEach((link) => {
+    const href = shareEndpoints[link.dataset.share];
+    if (href) link.href = href;
+  });
+
+  const copyBtn = document.getElementById('share-copy');
+  const copied = document.getElementById('share-copied');
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      copied.textContent = 'リンクをコピーしました。';
+    } catch {
+      copied.textContent = `コピーできませんでした。URL: ${shareUrl}`;
+    }
+    copied.hidden = false;
+  });
+
+  /* ---------- ページ先頭へ戻る ---------- */
+  const gototop = document.getElementById('gototop');
+  let ticking = false;
+
+  function updateGototop() {
+    gototop.classList.toggle('on', window.scrollY > 400);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateGototop);
+  }, { passive: true });
+  updateGototop();
+
+  /* ---------- スクロール表示アニメーション ---------- */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealItems = document.querySelectorAll('.reveal');
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+
+    revealItems.forEach((el) => io.observe(el));
+  }
+})();
+</script>
+</body>
+</html>
