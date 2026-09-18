@@ -8,6 +8,9 @@
 <meta property="og:title" content="統一地方選挙2027 特設サイト" />
 <meta property="og:description" content="あなたのお住まいの地域の選挙がわかる。第21回統一地方選挙の日程・候補者・基礎知識をまとめてチェック。" />
 <meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" />
 <style>
   :root {
     /* クローム配色（出典: shugiin.go2senkyo.com/51） */
@@ -382,61 +385,76 @@
   /* ---------- hero ---------- */
   .hero {
     position: relative;
+    display: flex;
+    align-items: center;
+    min-height: clamp(260px, 36vw, 380px);
     color: #fff;
     background:
-      radial-gradient(1000px 460px at 88% -10%, rgb(180 232 232 / .32), transparent 62%),
-      radial-gradient(760px 420px at 6% 108%, rgb(20 80 80 / .5), transparent 60%),
-      linear-gradient(160deg, #38aaaa 0%, #2d8c8c 58%, #246868 100%);
+      linear-gradient(90deg, rgb(20 70 70 / .52) 0%, rgb(36 104 104 / .38) 42%, rgb(36 104 104 / .28) 100%),
+      url("senkyo2027/img/top/hero.jpg") center / cover no-repeat;
     overflow: hidden;
   }
   .hero::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgb(255 255 255 / .05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgb(255 255 255 / .05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: linear-gradient(180deg, rgb(0 0 0 / .8), transparent 78%);
+    background: linear-gradient(180deg, rgb(0 0 0 / .12) 0%, transparent 45%, rgb(0 0 0 / .18) 100%);
     pointer-events: none;
   }
   .hero__inner {
     position: relative;
     z-index: 1;
+    width: 100%;
     padding: clamp(44px, 7vw, 78px) 0 clamp(40px, 6vw, 62px);
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-    gap: clamp(28px, 4vw, 52px);
-    align-items: center;
-  }
-  @media (max-width: 880px) {
-    .hero__inner { grid-template-columns: 1fr; }
+    max-width: 720px;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .hero__title {
     margin: 0 0 16px;
-    font-weight: 800;
+    font-family: Lato, "Noto Sans JP", sans-serif;
+    font-weight: 700;
     line-height: 1.08;
-    letter-spacing: .02em;
+    letter-spacing: 0;
   }
   .hero__title .times {
     display: block;
-    font-size: clamp(17px, 2.6vw, 25px);
-    letter-spacing: .18em;
+    font-size: clamp(20px, 3.8vw, 36px);
+    font-weight: 400;
+    letter-spacing: .22em;
     color: rgb(255 255 255 / .9);
     margin-bottom: 10px;
+    text-indent: .22em;
   }
   .hero__title .main {
     display: block;
-    font-size: clamp(38px, 7.6vw, 73px);
-    text-shadow: 0 6px 24px rgb(20 80 80 / .38);
+    font-size: clamp(38px, 8vw, 70px);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-indent: .06em;
+    text-shadow: 0 2px 12px rgb(0 0 0 / .45), 0 6px 24px rgb(0 0 0 / .25);
+  }
+  @media (max-width: 767px) {
+    .hero__title .main {
+      line-height: 1.2;
+      letter-spacing: .04em;
+      text-indent: .04em;
+    }
   }
   .hero__catch {
     margin: 0 0 26px;
     font-size: clamp(17px, 2.5vw, 24px);
     font-weight: 800;
     line-height: 1.5;
+    text-shadow: 0 1px 8px rgb(0 0 0 / .35);
   }
-  .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
   @media screen and (max-width: 979px) {
     .hero__actions {
       flex-wrap: nowrap;
@@ -475,48 +493,122 @@
   .btn--outline:hover { background: var(--brand-soft); }
 
   /* countdown */
-  .countdown {
-    background: rgb(255 255 255 / .1);
-    border: 1px solid rgb(255 255 255 / .2);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    backdrop-filter: blur(6px);
+  #countdown.section { padding: clamp(36px, 5vw, 52px) 0; }
+  #countdown .section__head { margin-bottom: 20px; }
+  #countdown .section__label { margin-bottom: 6px; font-size: 11px; }
+  #countdown .section__title { font-size: clamp(22px, 3.2vw, 28px); }
+
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 780px;
+    margin-inline: auto;
   }
-  .countdown__label {
-    font-size: 12.5px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    color: rgb(255 255 255 / .72);
-    margin: 0 0 4px;
+  .countdown-card {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 16px 14px 14px;
+    border-top: 3px solid transparent;
+    box-shadow: var(--shadow-sm);
+    color: var(--text);
   }
-  .countdown__target {
-    margin: 0 0 16px;
-    font-size: 19px;
+  .countdown-card--first { border-top-color: #04a6a5; }
+  .countdown-card--second { border-top-color: #c45354; }
+  .countdown-card__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 12px;
+  }
+  .countdown-card__title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+  .countdown-card__vote {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .countdown-card__vote-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    color: var(--muted);
+  }
+  .countdown-card__vote-date {
+    font-size: clamp(17px, 2.6vw, 21px);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+  }
+  .countdown-card--first .countdown-card__vote-date { color: #04a6a5; }
+  .countdown-card--second .countdown-card__vote-date { color: #c45354; }
+  .countdown-card__vote-day {
+    font-size: 11px;
     font-weight: 800;
   }
-  .countdown__units {
+  .countdown-card--first .countdown-card__vote-day { color: #04a6a5; }
+  .countdown-card--second .countdown-card__vote-day { color: #c45354; }
+  .countdown-card__vote-time {
+    font-size: 12px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    margin-left: 2px;
+  }
+  .countdown-card--first .countdown-card__vote-time { color: #04a6a5; }
+  .countdown-card--second .countdown-card__vote-time { color: #c45354; }
+  .countdown-card__units {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 6px;
     margin: 0;
   }
-  .countdown__unit {
+  .countdown-card__unit {
     margin: 0;
-    background: rgb(255 255 255 / .95);
-    color: var(--navy);
-    border-radius: var(--radius-sm);
-    padding: 10px 4px 8px;
+    background: var(--brand-soft);
+    color: var(--text);
+    border-radius: 4px;
+    padding: 8px 4px 7px;
     text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.2;
   }
-  .countdown__num {
+  .countdown-card__num {
     display: block;
-    font-size: clamp(20px, 3.4vw, 28px);
+    font-size: clamp(16px, 2.4vw, 20px);
     font-weight: 800;
     line-height: 1.1;
     font-variant-numeric: tabular-nums;
+    margin-bottom: 3px;
+    color: var(--brand-dark);
   }
-  .countdown__cap { font-size: 11px; color: var(--muted); font-weight: 700; }
-  .countdown__note { margin: 12px 0 0; font-size: 11.5px; color: rgb(255 255 255 / .66); line-height: 1.6; }
+  .countdown-panel__note {
+    margin: 16px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    text-align: center;
+  }
+  @media (max-width: 979px) {
+    .countdown-grid { gap: 12px; }
+  }
+  @media (max-width: 380px) {
+    .countdown-card { padding: 14px 12px 12px; }
+    .countdown-card__head { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 10px; }
+    .countdown-card__vote-date { font-size: 16px; }
+    .countdown-card__num { font-size: 15px; }
+  }
 
   /* ---------- sections ---------- */
   .section { padding: clamp(52px, 7vw, 84px) 0; }
@@ -567,7 +659,7 @@
     flex-wrap: wrap;
   }
   .sched-card--first .sched-card__head { background: linear-gradient(100deg, #04a6a5 0%, #5e7a7a 100%); }
-  .sched-card--second .sched-card__head { background: linear-gradient(100deg, #c45354 0%, #5e7a7a 100%); }
+  .sched-card--second .sched-card__head { background: linear-gradient(100deg, #c45354 0%, #555 100%); }
   .sched-card__title { margin: 0; font-size: 18px; font-weight: 800; }
   .sched-card__vote {
     margin-left: auto;
@@ -1205,10 +1297,44 @@
   .about {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
-    gap: clamp(24px, 4vw, 44px);
-    align-items: start;
+    column-gap: clamp(24px, 4vw, 44px);
+    row-gap: 0;
+    grid-template-areas:
+      "label  ."
+      "title  facts"
+      "body   facts";
   }
-  @media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+  .about__label {
+    grid-area: label;
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    color: var(--brand);
+    margin-bottom: 8px;
+  }
+  .about__title {
+    grid-area: title;
+    margin: 0 0 20px;
+    font-size: clamp(22px, 3.4vw, 31px);
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: .01em;
+  }
+  .about__body { grid-area: body; }
+  .about .facts { grid-area: facts; align-self: start; }
+  @media (max-width: 860px) {
+    .about {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "label"
+        "title"
+        "facts"
+        "body";
+    }
+    .about__title { margin-bottom: 16px; }
+    .about .facts { margin-bottom: 20px; }
+  }
   .about__body p { margin: 0 0 16px; font-size: 15px; }
   .about__body p:last-child { margin-bottom: 0; }
   .about__body .marker {
@@ -1740,30 +1866,77 @@
           <a class="btn btn--ghost" href="#matching">投票マッチングをする</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="countdown">
-        <p class="countdown__label">前半戦 投票日まで</p>
-        <p class="countdown__target">2027年4月11日（日）</p>
-        <div class="countdown__units" id="countdown" aria-live="off">
-          <p class="countdown__unit"><span class="countdown__num" id="cd-days">--</span><span class="countdown__cap">日</span></p>
-          <p class="countdown__unit"><span class="countdown__num" id="cd-hours">--</span><span class="countdown__cap">時間</span></p>
-          <p class="countdown__unit"><span class="countdown__num" id="cd-mins">--</span><span class="countdown__cap">分</span></p>
-          <p class="countdown__unit"><span class="countdown__num" id="cd-secs">--</span><span class="countdown__cap">秒</span></p>
-        </div>
-        <p class="countdown__note">※日程は想定です。統一地方選挙の期日は特例法の成立により正式に決定します。</p>
+  <!-- ========== 投票日カウントダウン ========== -->
+  <section class="section section--tint" id="countdown">
+    <div class="inner">
+      <div class="section__head section__head--center">
+        <span class="section__label">VOTE DAY</span>
+        <h2 class="section__title">投票日まで</h2>
       </div>
+
+      <div class="countdown-grid">
+        <article class="countdown-card countdown-card--first" data-deadline="2027-04-11T07:00:00+09:00" aria-label="都道府県の投票日まで">
+          <header class="countdown-card__head">
+            <h3 class="countdown-card__title">都道府県</h3>
+            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/11</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
+          </header>
+          <div class="countdown-card__units" aria-live="off">
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+          </div>
+        </article>
+        <article class="countdown-card countdown-card--first" data-deadline="2027-04-11T07:00:00+09:00" aria-label="政令指定都市の投票日まで">
+          <header class="countdown-card__head">
+            <h3 class="countdown-card__title">政令指定都市</h3>
+            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/11</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
+          </header>
+          <div class="countdown-card__units" aria-live="off">
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+          </div>
+        </article>
+        <article class="countdown-card countdown-card--second" data-deadline="2027-04-25T07:00:00+09:00" aria-label="一般市町村の投票日まで">
+          <header class="countdown-card__head">
+            <h3 class="countdown-card__title">一般市町村</h3>
+            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/25</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
+          </header>
+          <div class="countdown-card__units" aria-live="off">
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+          </div>
+        </article>
+        <article class="countdown-card countdown-card--second" data-deadline="2027-04-25T07:00:00+09:00" aria-label="特別区（東京23区）の投票日まで">
+          <header class="countdown-card__head">
+            <h3 class="countdown-card__title">特別区（東京23区）</h3>
+            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/25</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
+          </header>
+          <div class="countdown-card__units" aria-live="off">
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
+            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+          </div>
+        </article>
+      </div>
+      <p class="countdown-panel__note">※日程は想定です。統一地方選挙の期日は特例法の成立により正式に決定します。</p>
     </div>
   </section>
 
   <!-- ========== 統一地方選挙とは ========== -->
   <section class="section" id="about">
     <div class="inner">
-      <div class="section__head">
-        <span class="section__label">ABOUT</span>
-        <h2 class="section__title">統一地方選挙とは</h2>
-      </div>
-
       <div class="about">
+        <span class="about__label">ABOUT</span>
+        <h2 class="about__title">統一地方選挙とは</h2>
         <div class="about__body">
           <p>
             「統一地方選挙」とは、<span class="marker">全国の地方自治体の首長と議会議員の選挙期日を統一して一斉に行う、4年に1度の大型選挙</span>のことです。
@@ -1771,7 +1944,7 @@
           </p>
           <p>
             投票日は2回に分けられ、知事選挙や道府県議会議員選挙などが「前半戦」、市区町村の首長や議会議員の選挙が「後半戦」と呼ばれます。
-            現職首長の辞職や議会の解散などによって統一地方選挙で行われる選挙の数は年々減少傾向にありますが、それでも全国で約1,000の選挙がこの期間に集中します。
+            現職首長の辞職や議会の解散などによって統一地方選挙で行われる選挙の数は年々減少傾向にありますが、それでも全国で約2,102の選挙がこの期間に集中します。
           </p>
           <p>
             国政政党にとって、全国の地方議員の数は党勢を左右する重要な指標です。国政選挙と同じように重視され、多くの候補者が擁立されます。
@@ -1784,7 +1957,7 @@
             <div><dt>実施回数</dt><dd>第21<small>回</small></dd></div>
             <div><dt>実施サイクル</dt><dd>4<small>年に1度</small></dd></div>
             <div><dt>投票日</dt><dd>2<small>回（前半・後半）</small></dd></div>
-            <div><dt>対象となる選挙</dt><dd>約1,000<small>件</small></dd></div>
+            <div><dt>対象となる選挙</dt><dd>約2,102<small>件</small></dd></div>
             <div><dt>統一率</dt><dd>約27<small>%</small></dd></div>
             <div><dt>投票できる年齢</dt><dd>18<small>歳以上</small></dd></div>
           </dl>
@@ -1799,7 +1972,6 @@
       <div class="section__head">
         <span class="section__label">SCHEDULE</span>
         <h2 class="section__title">選挙日程</h2>
-        <p class="section__desc">統一地方選挙は「前半戦」と「後半戦」の2つの投票日に分かれています。ご自身の地域がどちらに該当するかを確認しましょう。</p>
       </div>
 
       <div class="schedule">
@@ -2278,29 +2450,29 @@
   'use strict';
 
   /* ---------- カウントダウン ---------- */
-  const target = new Date('2027-04-11T07:00:00+09:00');
   const pad = (n) => String(n).padStart(2, '0');
-  const nodes = {
-    days: document.getElementById('cd-days'),
-    hours: document.getElementById('cd-hours'),
-    mins: document.getElementById('cd-mins'),
-    secs: document.getElementById('cd-secs'),
-  };
+  const countdownCards = [...document.querySelectorAll('.countdown-card[data-deadline]')];
 
-  function tick() {
+  function updateCountdownCard(card) {
+    const target = new Date(card.dataset.deadline);
+    const nums = card.querySelectorAll('.countdown-card__num');
+    if (Number.isNaN(target.getTime()) || nums.length < 4) return;
     const diff = target - Date.now();
     if (diff <= 0) {
-      Object.values(nodes).forEach((el) => { el.textContent = '0'; });
-      return false;
+      nums.forEach((el) => { el.textContent = '0'; });
+      return;
     }
     const s = Math.floor(diff / 1000);
-    nodes.days.textContent = Math.floor(s / 86400);
-    nodes.hours.textContent = pad(Math.floor(s / 3600) % 24);
-    nodes.mins.textContent = pad(Math.floor(s / 60) % 60);
-    nodes.secs.textContent = pad(s % 60);
-    return true;
+    nums[0].textContent = Math.floor(s / 86400);
+    nums[1].textContent = pad(Math.floor(s / 3600) % 24);
+    nums[2].textContent = pad(Math.floor(s / 60) % 60);
+    nums[3].textContent = pad(s % 60);
   }
-  if (tick()) setInterval(tick, 1000);
+
+  if (countdownCards.length) {
+    countdownCards.forEach(updateCountdownCard);
+    setInterval(() => countdownCards.forEach(updateCountdownCard), 1000);
+  }
 
   /* ---------- 特集動画スライダー（告示日連動） ---------- */
   const movieSlider = document.getElementById('movie-slider');
