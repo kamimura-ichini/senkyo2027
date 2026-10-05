@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- DEMO ver6: フォントサイズ統一＋投票日ボード再デザイン＋市区町村選択後は選挙名のみ表示。画像・データは https://senkyo2027site.vercel.app/ から読込 -->
 <title>統一地方選挙2027 特設サイト｜あなたのお住まいの地域の選挙がわかる</title>
 <meta name="description" content="2027年4月に行われる第21回統一地方選挙の特設サイト。選挙日程、地域ごとの選挙情報、投票マッチング、選挙の基礎知識をまとめてお届けします。" />
 <meta property="og:title" content="統一地方選挙2027 特設サイト" />
@@ -39,6 +40,14 @@
     --header-h: 56px;
     --nav-h: 54px;
     --foot-bg: #edede2;
+
+    /* ===== タイプスケール（統一） ===== */
+    --fs-xs: 0.75rem;    /* 12px : キャプション/ラベル/注記/件数 */
+    --fs-sm: 0.875rem;   /* 14px : 補助テキスト/表/入力/小ボタン */
+    --fs-body: 1rem;     /* 16px : 本文（既定） */
+    --fs-lg: 1.125rem;   /* 18px : 強調文/小見出し/数値表示 */
+    --fs-h1: clamp(1.5rem, 3.4vw, 1.9375rem);   /* 24-31px : セクション見出し */
+    --fs-display: clamp(2.375rem, 8vw, 4.375rem); /* 38-70px : ヒーロー大見出し */
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -52,7 +61,7 @@
     color: var(--text);
     background: var(--bg);
     line-height: 1.8;
-    font-size: 16px;
+    font-size: var(--fs-body);
     -webkit-text-size-adjust: 100%;
   }
 
@@ -82,6 +91,12 @@
   .inner {
     width: min(1080px, 100% - 40px);
     margin-inline: auto;
+  }
+  .inner--narrow {
+    max-width: 840px;
+  }
+  .inner--movie {
+    max-width: 1000px;
   }
 
   /* ---------- 表示切替ユーティリティ ---------- */
@@ -122,8 +137,8 @@
     align-items: center;
     letter-spacing: .1em;
   }
-  .m_head_logo_para .small { font-size: 18px; margin-right: 5px; }
-  .m_head_logo_para .big { font-size: 16px; }
+  .m_head_logo_para .small { font-size: var(--fs-lg); margin-right: 5px; }
+  .m_head_logo_para .big { font-size: var(--fs-lg); }
 
   /* PCヘッダー右／SP固定ナビ 共通リスト */
   .m_nav_list { display: flex; height: 100%; margin: 0; padding: 0; list-style: none; }
@@ -151,7 +166,7 @@
   }
   .m_nav_list li .link:hover, .m_nav_list li a:hover { opacity: .5; }
   .m_nav_list li .icon { width: 24px; display: block; line-height: 0; margin-right: 5px; }
-  .m_nav_list li .text { font-size: 14px; }
+  .m_nav_list li .text { font-size: var(--fs-sm); }
 
   .m_head_btn_outer {
     padding: 10px 20px;
@@ -221,7 +236,7 @@
     display: block;
     color: #fff;
     line-height: 1.4;
-    font-size: 16px;
+    font-size: var(--fs-body);
     font-weight: 700;
     text-decoration: none;
     background: none;
@@ -238,7 +253,7 @@
     padding: 15px 5px;
     border: 1px solid #fff;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: var(--fs-sm);
     line-height: 1.5;
     text-align: center;
   }
@@ -319,7 +334,7 @@
       padding: 8px 10px 10px;
     }
     .m_nav_list li .icon { width: 24px; margin: auto; }
-    .m_nav_list li .text { font-size: 11px; line-height: 1; display: block; margin-top: 5px; }
+    .m_nav_list li .text { font-size: var(--fs-sm); line-height: 1; display: block; margin-top: 5px; }
     .m_nav_list li .m_head_btn { margin: 7px auto; }
   }
 
@@ -362,11 +377,11 @@
     padding: 16px 20px;
     border-bottom: 1px solid var(--line);
   }
-  .search-dialog__head h2 { margin: 0; font-size: 16px; font-weight: 800; }
+  .search-dialog__head h2 { margin: 0; font-size: var(--fs-lg); font-weight: 800; }
   .search-dialog__close {
     border: none;
     background: none;
-    font-size: 22px;
+    font-size: var(--fs-lg);
     line-height: 1;
     padding: 6px 8px;
     cursor: pointer;
@@ -377,10 +392,10 @@
   .search-dialog__body { padding: 20px; display: grid; gap: 16px; }
   .search-dialog__body h3 {
     margin: 0 0 6px;
-    font-size: 14px;
+    font-size: var(--fs-sm);
     font-weight: 800;
   }
-  .search-dialog__body p.hint { margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+  .search-dialog__body p.hint { margin: 0 0 10px; font-size: var(--fs-sm); color: var(--muted); }
 
   /* ---------- hero ---------- */
   .hero {
@@ -420,7 +435,7 @@
   }
   .hero__title .times {
     display: block;
-    font-size: clamp(20px, 3.8vw, 36px);
+    font-size: var(--fs-h1);
     font-weight: 400;
     letter-spacing: .22em;
     color: rgb(255 255 255 / .9);
@@ -429,7 +444,7 @@
   }
   .hero__title .main {
     display: block;
-    font-size: clamp(38px, 8vw, 70px);
+    font-size: var(--fs-display);
     font-weight: 700;
     letter-spacing: .06em;
     text-indent: .06em;
@@ -444,7 +459,7 @@
   }
   .hero__catch {
     margin: 0 0 26px;
-    font-size: clamp(17px, 2.5vw, 24px);
+    font-size: var(--fs-lg);
     font-weight: 800;
     line-height: 1.5;
     text-shadow: 0 1px 8px rgb(0 0 0 / .35);
@@ -464,7 +479,7 @@
       flex: 1 1 0;
       min-width: 0;
       padding: 12px 8px;
-      font-size: 13px;
+      font-size: var(--fs-body);
       line-height: 1.35;
       text-align: center;
     }
@@ -478,7 +493,7 @@
     padding: 13px 26px;
     border-radius: 999px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: var(--fs-body);
     text-decoration: none;
     border: 2px solid transparent;
     cursor: pointer;
@@ -495,119 +510,104 @@
   /* countdown */
   #countdown.section { padding: clamp(36px, 5vw, 52px) 0; }
   #countdown .section__head { margin-bottom: 20px; }
-  #countdown .section__label { margin-bottom: 6px; font-size: 11px; }
-  #countdown .section__title { font-size: clamp(22px, 3.2vw, 28px); }
+  #countdown .section__label { margin-bottom: 6px; font-size: var(--fs-xs); }
+  #countdown .section__title { font-size: var(--fs-h1); }
 
-  .countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    max-width: 780px;
+  /* 投票日ボード：タイル・角丸・影を使わず、罫線と色帯で組む */
+  .vote-board {
+    max-width: 880px;
     margin-inline: auto;
+    border-top: 3px solid var(--text);
   }
-  .countdown-card {
-    margin: 0;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    padding: 16px 14px 14px;
-    border-top: 3px solid transparent;
-    box-shadow: var(--shadow-sm);
-    color: var(--text);
-  }
-  .countdown-card--first { border-top-color: #04a6a5; }
-  .countdown-card--second { border-top-color: #c45354; }
-  .countdown-card__head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 12px;
-    margin: 0 0 12px;
-  }
-  .countdown-card__title {
-    margin: 0;
-    font-size: 13px;
-    font-weight: 800;
-    line-height: 1.35;
-    color: var(--muted);
-  }
-  .countdown-card__vote {
-    margin: 0;
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-  .countdown-card__vote-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: .06em;
-    color: var(--muted);
-  }
-  .countdown-card__vote-date {
-    font-size: clamp(17px, 2.6vw, 21px);
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -.02em;
-  }
-  .countdown-card--first .countdown-card__vote-date { color: #04a6a5; }
-  .countdown-card--second .countdown-card__vote-date { color: #c45354; }
-  .countdown-card__vote-day {
-    font-size: 11px;
-    font-weight: 800;
-  }
-  .countdown-card--first .countdown-card__vote-day { color: #04a6a5; }
-  .countdown-card--second .countdown-card__vote-day { color: #c45354; }
-  .countdown-card__vote-time {
-    font-size: 12px;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    margin-left: 2px;
-  }
-  .countdown-card--first .countdown-card__vote-time { color: #04a6a5; }
-  .countdown-card--second .countdown-card__vote-time { color: #c45354; }
-  .countdown-card__units {
+  .vote-row {
+    --phase: #04a6a5;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    margin: 0;
+    grid-template-columns: 11.5rem 1fr auto;
+    grid-template-areas: "when target left";
+    align-items: center;
+    gap: 8px 32px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--text);
   }
-  .countdown-card__unit {
-    margin: 0;
-    background: var(--brand-soft);
-    color: var(--text);
-    border-radius: 4px;
-    padding: 8px 4px 7px;
-    text-align: center;
-    font-size: 9px;
+  .vote-row--second { --phase: #c45354; }
+  .vote-row__when { grid-area: when; }
+  .vote-row__phase {
+    display: inline-block;
+    padding: 2px 10px;
+    background: var(--phase);
+    color: #fff;
+    font-size: var(--fs-sm);
     font-weight: 700;
-    line-height: 1.2;
+    letter-spacing: .12em;
+    line-height: 1.6;
   }
-  .countdown-card__num {
-    display: block;
-    font-size: clamp(16px, 2.4vw, 20px);
-    font-weight: 800;
+  .vote-row__date {
+    margin: 8px 0 0;
+    font-family: Lato, "Noto Sans JP", sans-serif;
+    font-size: var(--fs-h1);
+    font-weight: 700;
     line-height: 1.1;
     font-variant-numeric: tabular-nums;
-    margin-bottom: 3px;
-    color: var(--brand-dark);
+    white-space: nowrap;
+  }
+  .vote-row__date small { font-size: var(--fs-body); margin: 0 2px; }
+  .vote-row__dow {
+    margin-left: 6px;
+    font-size: var(--fs-body);
+    color: var(--phase);
+  }
+  .vote-row__target {
+    grid-area: target;
+    padding-left: 32px;
+    border-left: 1px solid var(--line);
+  }
+  .vote-row__target-main { margin: 0; font-size: var(--fs-body); font-weight: 700; line-height: 1.6; }
+  .vote-row__target-sub { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; word-break: keep-all; }
+  .vote-row__left {
+    grid-area: left;
+    margin: 0;
+    text-align: right;
+    line-height: 1;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .vote-row__pre { font-size: var(--fs-body); font-weight: 700; color: var(--muted); margin-right: 6px; }
+  .vote-row__days {
+    font-family: Lato, "Noto Sans JP", sans-serif;
+    font-size: var(--fs-display);
+    font-weight: 700;
+    color: var(--phase);
+    letter-spacing: -.02em;
+  }
+  .vote-row__unit { font-size: var(--fs-lg); font-weight: 700; margin-left: 4px; }
+  .vote-row__clock {
+    display: block;
+    margin-top: 10px;
+    font-size: var(--fs-sm);
+    color: var(--muted);
+  }
+  .vote-row__clock .countdown-card__num {
+    font-family: Lato, "Noto Sans JP", sans-serif;
+    font-size: var(--fs-body);
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 2px 0 6px;
   }
   .countdown-panel__note {
     margin: 16px 0 0;
-    font-size: 11px;
+    font-size: var(--fs-xs);
     color: var(--muted);
     line-height: 1.5;
     text-align: center;
   }
-  @media (max-width: 979px) {
-    .countdown-grid { gap: 12px; }
-  }
-  @media (max-width: 380px) {
-    .countdown-card { padding: 14px 12px 12px; }
-    .countdown-card__head { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 10px; }
-    .countdown-card__vote-date { font-size: 16px; }
-    .countdown-card__num { font-size: 15px; }
+  @media (max-width: 760px) {
+    .vote-row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "when left" "target target";
+      gap: 16px 16px;
+      padding: 20px 0;
+    }
+    .vote-row__target { padding: 14px 0 0; border-left: 0; border-top: 1px dashed var(--line); }
   }
 
   /* ---------- sections ---------- */
@@ -619,7 +619,7 @@
   .section__head--center { text-align: center; }
   .section__label {
     display: block;
-    font-size: 12px;
+    font-size: var(--fs-xs);
     font-weight: 800;
     letter-spacing: .16em;
     color: var(--brand);
@@ -628,12 +628,12 @@
   .section--navy .section__label { color: var(--beige); }
   .section__title {
     margin: 0 0 10px;
-    font-size: clamp(22px, 3.4vw, 31px);
+    font-size: var(--fs-h1);
     font-weight: 800;
     line-height: 1.4;
     letter-spacing: .01em;
   }
-  .section__desc { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 46em; }
+  .section__desc { margin: 0; color: var(--muted); font-size: var(--fs-body); max-width: 46em; }
   .section__head--center .section__desc { margin-inline: auto; }
   .section--navy .section__desc { color: rgb(255 255 255 / .78); }
 
@@ -660,10 +660,10 @@
   }
   .sched-card--first .sched-card__head { background: linear-gradient(100deg, #04a6a5 0%, #5e7a7a 100%); }
   .sched-card--second .sched-card__head { background: linear-gradient(100deg, #c45354 0%, #555 100%); }
-  .sched-card__title { margin: 0; font-size: 18px; font-weight: 800; }
+  .sched-card__title { margin: 0; font-size: var(--fs-lg); font-weight: 800; }
   .sched-card__vote {
     margin-left: auto;
-    font-size: 13px;
+    font-size: var(--fs-body);
     font-weight: 700;
     background: rgb(255 255 255 / .2);
     border-radius: 999px;
@@ -675,7 +675,7 @@
   table.sched {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: var(--fs-body);
   }
   table.sched th, table.sched td {
     padding: 12px 16px;
@@ -684,7 +684,7 @@
     vertical-align: middle;
   }
   table.sched thead th {
-    font-size: 12px;
+    font-size: var(--fs-body);
     letter-spacing: .04em;
     color: var(--muted);
     background: var(--beige-light);
@@ -694,11 +694,11 @@
   table.sched tbody tr:last-child th,
   table.sched tbody tr:last-child td { border-bottom: none; }
   table.sched td.date { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
-  table.sched td.date span { font-weight: 500; color: var(--muted); font-size: 12.5px; }
+  table.sched td.date span { font-weight: 500; color: var(--muted); font-size: var(--fs-body); }
 
   .note {
     margin: 18px 0 0;
-    font-size: 12.5px;
+    font-size: var(--fs-xs);
     color: var(--muted);
     line-height: 1.75;
   }
@@ -711,7 +711,7 @@
     background: var(--navy);
     color: #fff;
     font-weight: 700;
-    font-size: 14px;
+    font-size: var(--fs-sm);
     font-family: inherit;
     cursor: pointer;
     white-space: nowrap;
@@ -727,18 +727,11 @@
     border-radius: var(--radius);
     padding: 34px 30px 40px;
   }
-  .m_map_ttl {
-    margin: 0 0 10px;
-    padding-left: 14px;
-    border-left: 6px solid #38aaaa;
-    font-size: 26px;
-    font-weight: 800;
-    line-height: 1.4;
-  }
+  .m_map_outer .section__head { margin-bottom: 10px; }
   .m_map_lead {
     margin: 0 0 26px;
     color: var(--muted);
-    font-size: 15px;
+    font-size: var(--fs-body);
   }
   .m_map_wrapp {
     overflow-x: auto;
@@ -776,7 +769,7 @@
     width: 100%;
     height: 100%;
     color: #fff;
-    font-size: 15px;
+    font-size: var(--fs-body);
     font-weight: 700;
     letter-spacing: .01em;
     line-height: 1;
@@ -856,11 +849,10 @@
 
   @media (max-width: 900px) {
     .m_map_outer { padding: 26px 18px 30px; }
-    .m_map_ttl { font-size: 21px; }
-    .m_map_lead { font-size: 14px; margin-bottom: 20px; }
+    .m_map_lead { font-size: var(--fs-sm); margin-bottom: 20px; }
     .m_map_inner { min-width: 540px; }
     .m_map { --row: 42px; --h: 35px; }
-    .m_map a { font-size: 12.5px; }
+    .m_map a { font-size: var(--fs-sm); }
   }
 
   /* ---------- 都道府県別 選挙・選挙区 ---------- */
@@ -884,13 +876,13 @@
   }
   .pref-elections__title {
     margin: 0;
-    font-size: clamp(22px, 3vw, 30px);
+    font-size: var(--fs-lg);
     line-height: 1.35;
   }
   .pref-elections__summary {
     margin: 0;
     color: var(--muted);
-    font-size: 13px;
+    font-size: var(--fs-sm);
     white-space: nowrap;
   }
   .municipality-search {
@@ -902,7 +894,7 @@
     display: block;
     margin-bottom: 7px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: var(--fs-sm);
     font-weight: 700;
   }
   .municipality-search input {
@@ -914,7 +906,7 @@
     border-radius: var(--radius-sm);
     color: var(--text);
     font: inherit;
-    font-size: 14px;
+    font-size: var(--fs-body);
   }
   .municipality-search input:focus {
     border-color: var(--accent);
@@ -941,7 +933,7 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     color: var(--text);
-    font-size: 13px;
+    font-size: var(--fs-sm);
     font-weight: 700;
     line-height: 1.4;
     text-decoration: none;
@@ -955,10 +947,22 @@
     outline: 3px solid var(--accent);
     outline-offset: 2px;
   }
+  .municipality-list__label {
+    flex: 1 1 auto;
+    min-width: 0;
+    line-height: 1.35;
+  }
+  .municipality-list__pref {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
   .municipality-list__count {
     flex: 0 0 auto;
     color: var(--muted);
-    font-size: 10px;
+    font-size: var(--fs-xs);
     font-weight: 500;
   }
   .municipality-list__empty,
@@ -967,7 +971,7 @@
     padding: 20px;
     background: var(--beige-light);
     color: var(--muted);
-    font-size: 13px;
+    font-size: var(--fs-sm);
     text-align: center;
   }
   .municipality-list__empty[hidden],
@@ -987,12 +991,12 @@
   .pref-assembly-direct strong {
     display: block;
     margin-bottom: 2px;
-    font-size: 14px;
+    font-size: var(--fs-sm);
   }
   .pref-assembly-direct span {
     display: block;
     color: var(--muted);
-    font-size: 12px;
+    font-size: var(--fs-sm);
   }
   .pref-assembly-direct a,
   .assembly-match-note button {
@@ -1003,7 +1007,7 @@
     background: var(--navy);
     color: #fff;
     font: inherit;
-    font-size: 12px;
+    font-size: var(--fs-sm);
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
@@ -1016,7 +1020,7 @@
     background: transparent;
     color: #327494;
     font: inherit;
-    font-size: 13px;
+    font-size: var(--fs-sm);
     font-weight: 700;
     cursor: pointer;
   }
@@ -1029,7 +1033,7 @@
   }
   .municipality-result__head h4 {
     margin: 0;
-    font-size: clamp(20px, 3vw, 27px);
+    font-size: var(--fs-lg);
     line-height: 1.4;
   }
   .election-category + .election-category { margin-top: 32px; }
@@ -1048,18 +1052,18 @@
     border-radius: 50%;
     background: var(--accent);
     color: #fff;
-    font-size: 14px;
+    font-size: var(--fs-sm);
     font-weight: 800;
   }
   .election-category__head h5 {
     margin: 0;
-    font-size: 17px;
+    font-size: var(--fs-body);
     line-height: 1.4;
   }
   .election-category__head p {
     margin: 2px 0 0;
     color: var(--muted);
-    font-size: 11px;
+    font-size: var(--fs-sm);
   }
   .assembly-match-note {
     padding: 18px;
@@ -1072,7 +1076,7 @@
   .assembly-match-note p {
     margin: 0 0 12px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: var(--fs-sm);
   }
   .pref-elections__list {
     display: grid;
@@ -1095,7 +1099,7 @@
   }
   .election-frame__title {
     margin: 0;
-    font-size: 16px;
+    font-size: var(--fs-body);
     font-weight: 800;
     line-height: 1.5;
   }
@@ -1105,7 +1109,7 @@
     border-radius: 999px;
     background: var(--navy);
     color: #fff;
-    font-size: 11px;
+    font-size: var(--fs-xs);
     font-weight: 700;
   }
   .election-frame__dates {
@@ -1116,9 +1120,44 @@
     padding: 10px 18px;
     border-bottom: 1px solid var(--line);
     color: var(--muted);
-    font-size: 12px;
+    font-size: var(--fs-sm);
   }
   .election-frame__dates span { white-space: nowrap; }
+  .election-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    overflow: hidden;
+  }
+  .election-links li + li { border-top: 1px solid var(--line); }
+  .election-links a {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    min-height: 56px;
+    padding: 12px 44px 12px 18px;
+    position: relative;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .election-links a::after {
+    content: "›";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: var(--fs-lg);
+    line-height: 1;
+  }
+  .election-links a:hover { background: var(--accent-soft); }
+  .election-links a:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .election-links__name { font-size: var(--fs-body); font-weight: 700; }
+  .election-links__district { font-size: var(--fs-sm); color: var(--muted); }
   .district-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1136,7 +1175,7 @@
     padding: 10px;
     border-radius: 4px;
     color: var(--text);
-    font-size: 14px;
+    font-size: var(--fs-sm);
     font-weight: 700;
     line-height: 1.5;
     text-decoration: none;
@@ -1145,7 +1184,7 @@
     flex: 0 0 auto;
     content: "›";
     color: var(--accent);
-    font-size: 22px;
+    font-size: var(--fs-lg);
     line-height: 1;
   }
   .district-list a:hover {
@@ -1155,13 +1194,6 @@
   .district-list a:focus-visible {
     outline: 3px solid var(--accent);
     outline-offset: -2px;
-  }
-  .district-list__municipality {
-    display: block;
-    margin-top: 2px;
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 500;
   }
   .pref-elections__empty {
     margin: 0;
@@ -1193,14 +1225,14 @@
   .m_matching_head_subttl {
     margin: 0;
     padding: 0 30px;
-    font-size: 24px;
+    font-size: var(--fs-h1);
     font-weight: 700;
     text-align: center;
   }
   .m_matching_head_subttl .text {
     display: inline-block;
     position: relative;
-    font-size: 24px;
+    font-size: var(--fs-h1);
   }
   .m_matching_head_subttl .text::before {
     content: "";
@@ -1213,7 +1245,7 @@
     background: url(senkyo2027/img/cmn/icon_new.svg) no-repeat 50% / contain;
   }
   .m_matching_head_subttl .accent { color: var(--brand); }
-  .m_matching_head_subttl .accent .small { font-size: 21px; }
+  .m_matching_head_subttl .accent .small { font-size: var(--fs-lg); }
   .m_matching_head_ttl { margin: 10px 0 0; }
   .m_matching_head_ttl img {
     display: block;
@@ -1224,13 +1256,13 @@
   .m_matching_body { margin-top: 30px; }
   .m_matching_para {
     margin: 0;
-    font-size: 18px;
+    font-size: var(--fs-lg);
     text-align: center;
   }
   .m_matching_note {
     margin: 20px 0 0;
     color: var(--muted);
-    font-size: 12px;
+    font-size: var(--fs-sm);
     line-height: 1.7;
     text-align: center;
   }
@@ -1247,7 +1279,7 @@
     border: 2px solid var(--taupe);
     border-radius: 50px;
     color: var(--text);
-    font-size: 20px;
+    font-size: var(--fs-lg);
     font-weight: 700;
     text-decoration: none;
     transition: background-color .2s, color .2s;
@@ -1255,6 +1287,20 @@
   .m_page_link a:hover {
     background: var(--taupe);
     color: #fff;
+  }
+  .m_page_link .is-disabled {
+    display: block;
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background: #fff;
+    border: 2px solid var(--line);
+    border-radius: 50px;
+    color: var(--muted);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    text-align: center;
+    cursor: default;
   }
   .m_page_link a .text {
     position: relative;
@@ -1274,9 +1320,9 @@
   }
   @media (max-width: 767px) {
     .m_matching_head { padding: 20px 0; }
-    .m_matching_head_subttl { font-size: 18px; }
-    .m_matching_head_subttl .text { font-size: 22px; }
-    .m_matching_head_subttl .accent .small { font-size: 18px; }
+    .m_matching_head_subttl { font-size: var(--fs-lg); }
+    .m_matching_head_subttl .text { font-size: var(--fs-lg); }
+    .m_matching_head_subttl .accent .small { font-size: var(--fs-lg); }
     .m_matching_head_subttl .text::before {
       right: -50px;
       top: -10px;
@@ -1284,12 +1330,12 @@
       height: 30px;
     }
     .m_matching_head_ttl img { height: 50px; }
-    .m_matching_para { font-size: 16px; }
+    .m_matching_para { font-size: var(--fs-body); }
     .m_page_link { margin-top: 30px; }
     .m_page_link a {
       width: 77%;
       min-width: 260px;
-      font-size: 19px;
+      font-size: var(--fs-lg);
     }
   }
 
@@ -1301,13 +1347,13 @@
     row-gap: 0;
     grid-template-areas:
       "label  ."
-      "title  facts"
-      "body   facts";
+      "title  ."
+      "content facts";
   }
   .about__label {
     grid-area: label;
     display: block;
-    font-size: 12px;
+    font-size: var(--fs-xs);
     font-weight: 800;
     letter-spacing: .16em;
     color: var(--brand);
@@ -1315,29 +1361,32 @@
   }
   .about__title {
     grid-area: title;
-    margin: 0 0 20px;
-    font-size: clamp(22px, 3.4vw, 31px);
+    margin: 0 0 12px;
+    font-size: var(--fs-h1);
     font-weight: 800;
     line-height: 1.4;
     letter-spacing: .01em;
   }
-  .about__body { grid-area: body; }
-  .about .facts { grid-area: facts; align-self: start; }
+  .about__content { grid-area: content; }
+  .about .facts {
+    grid-area: facts;
+    align-self: start;
+  }
   @media (max-width: 860px) {
     .about {
       grid-template-columns: 1fr;
       grid-template-areas:
         "label"
         "title"
-        "facts"
-        "body";
+        "content"
+        "facts";
     }
-    .about__title { margin-bottom: 16px; }
-    .about .facts { margin-bottom: 20px; }
+    .about__title { margin-bottom: 12px; }
+    .about .facts { margin-bottom: 16px; }
   }
-  .about__body p { margin: 0 0 16px; font-size: 15px; }
-  .about__body p:last-child { margin-bottom: 0; }
-  .about__body .marker {
+  .about__content p { margin: 0 0 12px; font-size: var(--fs-body); }
+  .about__content p:last-child { margin-bottom: 0; }
+  .about__content .marker {
     background: linear-gradient(transparent 62%, #e6e0cd 62%);
     font-weight: 700;
   }
@@ -1354,13 +1403,13 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 12px;
-    padding: 14px 0;
+    padding: 8px 0;
     border-bottom: 1px solid var(--line);
   }
   .facts div:last-child { border-bottom: none; }
-  .facts dt { font-size: 13px; color: var(--muted); font-weight: 700; }
-  .facts dd { margin: 0; font-size: 17px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
-  .facts dd small { font-size: 12px; font-weight: 600; color: var(--muted); margin-left: 3px; }
+  .facts dt { font-size: var(--fs-body); color: var(--muted); font-weight: 700; }
+  .facts dd { margin: 0; font-size: var(--fs-body); font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+  .facts dd small { font-size: var(--fs-sm); font-weight: 600; color: var(--muted); margin-left: 3px; }
 
   /* ---------- cards ---------- */
   .cards {
@@ -1420,7 +1469,7 @@
     z-index: 2;
     background: var(--brand);
     color: #fff;
-    font-size: 11px;
+    font-size: var(--fs-xs);
     font-weight: 800;
     padding: 3px 10px;
     border-radius: 999px;
@@ -1434,7 +1483,7 @@
     z-index: 2;
     background: rgb(0 0 0 / .7);
     color: #fff;
-    font-size: 11px;
+    font-size: var(--fs-xs);
     font-weight: 700;
     padding: 1px 7px;
     border-radius: 4px;
@@ -1443,17 +1492,17 @@
   .card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .card__title {
     margin: 0;
-    font-size: 15px;
+    font-size: var(--fs-body);
     font-weight: 700;
     line-height: 1.6;
   }
   .card { position: relative; }
   .card:hover .card__title { color: var(--brand); }
-  .card__excerpt { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .card__excerpt { margin: 0; font-size: var(--fs-sm); color: var(--muted); line-height: 1.7; }
   .card__meta {
     margin-top: auto;
     padding-top: 6px;
-    font-size: 11.5px;
+    font-size: var(--fs-xs);
     color: var(--muted);
     display: flex;
     gap: 10px;
@@ -1477,25 +1526,20 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-  .movie-dates a {
+  .movie-dates span {
     display: inline-flex;
     align-items: center;
     min-height: 36px;
     padding: 6px 12px;
     border: 1px solid var(--line);
     border-radius: 999px;
-    color: var(--text);
-    background: var(--surface);
-    font-size: 12px;
+    color: var(--muted);
+    background: var(--beige-light);
+    font-size: var(--fs-sm);
     font-weight: 700;
-    text-decoration: none;
     white-space: nowrap;
-  }
-  .movie-dates a:hover { border-color: var(--brand); color: var(--brand); }
-  .movie-dates a[aria-current="true"] {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
+    opacity: .72;
+    cursor: default;
   }
   .movie-slider-controls {
     display: flex;
@@ -1508,7 +1552,7 @@
     border-radius: 50%;
     background: var(--surface);
     color: var(--text);
-    font-size: 18px;
+    font-size: var(--fs-lg);
     line-height: 1;
     cursor: pointer;
   }
@@ -1527,6 +1571,23 @@
     overscroll-behavior-x: contain;
     scrollbar-width: thin;
   }
+  .movie-slider.movie-slider--dual {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    overflow: visible;
+    padding: 0;
+    scroll-snap-type: none;
+  }
+  .movie-slider.movie-slider--dual .movie-slide {
+    flex: unset;
+    width: 100%;
+    min-width: 0;
+  }
+  @media (max-width: 640px) {
+    .movie-slider.movie-slider--dual { grid-template-columns: 1fr; }
+  }
   @media (prefers-reduced-motion: no-preference) {
     .movie-slider { scroll-behavior: smooth; }
   }
@@ -1539,7 +1600,7 @@
   .movie-slide__meta {
     margin: 0 0 10px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: var(--fs-sm);
     font-weight: 700;
   }
   .movie-embed {
@@ -1557,7 +1618,7 @@
     border-color: #9a9a9a;
   }
   .movie-embed--soon span {
-    font-size: clamp(18px, 2.8vw, 28px);
+    font-size: var(--fs-lg);
     font-weight: 800;
     letter-spacing: .12em;
   }
@@ -1598,7 +1659,7 @@
     cursor: pointer;
     padding: 16px 52px 16px 18px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: var(--fs-body);
     position: relative;
     line-height: 1.6;
   }
@@ -1619,7 +1680,7 @@
   .faq summary:hover { background: var(--beige-light); }
   .faq__answer {
     padding: 0 18px 18px;
-    font-size: 14px;
+    font-size: var(--fs-body);
     color: var(--muted);
     line-height: 1.85;
     margin: 0;
@@ -1634,8 +1695,8 @@
     text-align: center;
     padding: clamp(40px, 6vw, 66px) 0;
   }
-  .cta-band h2 { margin: 0 0 12px; font-size: clamp(21px, 3.2vw, 30px); font-weight: 800; }
-  .cta-band p { margin: 0 0 24px; font-size: 14.5px; color: rgb(255 255 255 / .9); }
+  .cta-band h2 { margin: 0 0 12px; font-size: var(--fs-h1); font-weight: 800; }
+  .cta-band p { margin: 0 0 24px; font-size: var(--fs-body); color: rgb(255 255 255 / .9); }
   .cta-band .btn--outline { color: var(--brand); }
 
   /* ---------- シェア帯（m_page_bottom / m_sharePage） ---------- */
@@ -1643,7 +1704,7 @@
   .m_sharePage { padding: 50px 0; text-align: center; }
   .m_sharePage_ttl {
     margin: 0;
-    font-size: 18px;
+    font-size: var(--fs-lg);
     display: inline-block;
     padding: 0 30px;
     color: var(--brand);
@@ -1679,7 +1740,7 @@
     transition: opacity .2s;
   }
   .m_sharePage_links_btn a:hover, .m_sharePage_links_btn button:hover { opacity: .6; }
-  .m_sharePage_note { margin: 18px 0 0; font-size: 12px; color: var(--muted); }
+  .m_sharePage_note { margin: 18px 0 0; font-size: var(--fs-xs); color: var(--muted); }
   .m_sharePage_note[hidden] { display: none; }
 
   @media (max-width: 767px) {
@@ -1695,7 +1756,7 @@
   }
   .m_foot_inner { width: 94%; margin: auto; }
   .m_foot_link {
-    font-size: 14px;
+    font-size: var(--fs-sm);
     line-height: 1.5;
     border: 1px solid #000;
     width: 350px;
@@ -1708,7 +1769,7 @@
   .m_foot_link a:hover { text-decoration: underline; }
   .m_foot_logo { width: 140px; margin: 40px auto auto; }
   .m_foot_logo a { display: block; }
-  .m_foot_copy { font-size: 10px; margin-top: 10px; }
+  .m_foot_copy { font-size: var(--fs-xs); margin-top: 10px; }
   .m_foot_gototop {
     position: fixed;
     right: 30px;
@@ -1731,7 +1792,7 @@
   }
 
   @media screen and (max-width: 767px) {
-    .m_foot_link { font-size: 13px; width: 240px; }
+    .m_foot_link { font-size: var(--fs-sm); width: 240px; }
     .m_foot_gototop { width: 40px; height: 40px; }
   }
 
@@ -1877,54 +1938,34 @@
         <h2 class="section__title">投票日まで</h2>
       </div>
 
-      <div class="countdown-grid">
-        <article class="countdown-card countdown-card--first" data-deadline="2027-04-11T07:00:00+09:00" aria-label="都道府県の投票日まで">
-          <header class="countdown-card__head">
-            <h3 class="countdown-card__title">都道府県</h3>
-            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/11</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
-          </header>
-          <div class="countdown-card__units" aria-live="off">
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+      <div class="vote-board">
+        <article class="countdown-card vote-row vote-row--first" data-deadline="2027-04-11T07:00:00+09:00" aria-label="前半戦（4月11日）の投票日まで">
+          <div class="vote-row__when">
+            <span class="vote-row__phase">前半戦</span>
+            <p class="vote-row__date">4<small>月</small>11<small>日</small><span class="vote-row__dow">日曜</span></p>
           </div>
+          <div class="vote-row__target">
+            <p class="vote-row__target-main">都道府県・政令指定都市</p>
+            <p class="vote-row__target-sub">知事／<wbr>道府県議会議員／<wbr>政令市長／<wbr>政令市議会議員<br>投票時間 7:00〜20:00（原則）</p>
+          </div>
+          <p class="vote-row__left" aria-live="off">
+            <span class="vote-row__pre">あと</span><span class="vote-row__days countdown-card__num">--</span><span class="vote-row__unit">日</span>
+            <span class="vote-row__clock"><span class="countdown-card__num">--</span>時間<span class="countdown-card__num">--</span>分<span class="countdown-card__num">--</span>秒</span>
+          </p>
         </article>
-        <article class="countdown-card countdown-card--first" data-deadline="2027-04-11T07:00:00+09:00" aria-label="政令指定都市の投票日まで">
-          <header class="countdown-card__head">
-            <h3 class="countdown-card__title">政令指定都市</h3>
-            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/11</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
-          </header>
-          <div class="countdown-card__units" aria-live="off">
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+        <article class="countdown-card vote-row vote-row--second" data-deadline="2027-04-25T07:00:00+09:00" aria-label="後半戦（4月25日）の投票日まで">
+          <div class="vote-row__when">
+            <span class="vote-row__phase">後半戦</span>
+            <p class="vote-row__date">4<small>月</small>25<small>日</small><span class="vote-row__dow">日曜</span></p>
           </div>
-        </article>
-        <article class="countdown-card countdown-card--second" data-deadline="2027-04-25T07:00:00+09:00" aria-label="一般市町村の投票日まで">
-          <header class="countdown-card__head">
-            <h3 class="countdown-card__title">一般市町村</h3>
-            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/25</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
-          </header>
-          <div class="countdown-card__units" aria-live="off">
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
+          <div class="vote-row__target">
+            <p class="vote-row__target-main">一般市町村・特別区（東京23区）</p>
+            <p class="vote-row__target-sub">市区町村長／<wbr>市区町村議会議員<br>投票時間 7:00〜20:00（原則）</p>
           </div>
-        </article>
-        <article class="countdown-card countdown-card--second" data-deadline="2027-04-25T07:00:00+09:00" aria-label="特別区（東京23区）の投票日まで">
-          <header class="countdown-card__head">
-            <h3 class="countdown-card__title">特別区（東京23区）</h3>
-            <p class="countdown-card__vote"><span class="countdown-card__vote-label">投票日</span><span class="countdown-card__vote-date">4/25</span><span class="countdown-card__vote-day">（日）</span><span class="countdown-card__vote-time">7:00</span></p>
-          </header>
-          <div class="countdown-card__units" aria-live="off">
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>日</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>時間</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>分</p>
-            <p class="countdown-card__unit"><span class="countdown-card__num">--</span>秒</p>
-          </div>
+          <p class="vote-row__left" aria-live="off">
+            <span class="vote-row__pre">あと</span><span class="vote-row__days countdown-card__num">--</span><span class="vote-row__unit">日</span>
+            <span class="vote-row__clock"><span class="countdown-card__num">--</span>時間<span class="countdown-card__num">--</span>分<span class="countdown-card__num">--</span>秒</span>
+          </p>
         </article>
       </div>
       <p class="countdown-panel__note">※日程は想定です。統一地方選挙の期日は特例法の成立により正式に決定します。</p>
@@ -1937,7 +1978,7 @@
       <div class="about">
         <span class="about__label">ABOUT</span>
         <h2 class="about__title">統一地方選挙とは</h2>
-        <div class="about__body">
+        <div class="about__content">
           <p>
             「統一地方選挙」とは、<span class="marker">全国の地方自治体の首長と議会議員の選挙期日を統一して一斉に行う、4年に1度の大型選挙</span>のことです。
             全国で選挙期間や投票日を集中させることで、有権者の選挙への関心を高め、投票率の向上を図ることを目的として戦後に始まりました。2027年で21回目を迎えます。
@@ -2027,7 +2068,10 @@
   <section class="section" id="area">
     <div class="inner">
       <div class="m_map_outer reveal">
-        <h3 class="m_map_ttl">自治体から探す</h3>
+        <div class="section__head">
+          <span class="section__label">FIND BY MUNICIPALITY</span>
+          <h2 class="section__title">自治体から探す</h2>
+        </div>
         <p class="m_map_lead">都道府県をクリックすると、該当する選挙区をご覧いただけます</p>
 
         <div class="m_map_wrapp">
@@ -2097,7 +2141,7 @@
 
         <div class="municipality-picker" id="municipality-picker">
           <label class="municipality-search">
-            <span>市区町村名から絞り込む</span>
+            <span>市区町村名から探す（全国）</span>
             <input type="search" id="municipality-search" placeholder="例：横浜市、世田谷区" autocomplete="off" />
           </label>
           <ul class="municipality-list" id="municipality-list"></ul>
@@ -2176,9 +2220,7 @@
           </div>
         </div>
         <div class="m_page_link">
-          <a href="https://votematches.go2senkyo.com/" target="_blank" rel="noopener noreferrer">
-            <span class="text">投票マッチングを始める</span>
-          </a>
+          <span class="is-disabled" role="status">準備中</span>
         </div>
       </div>
     </div>
@@ -2239,62 +2281,33 @@
 
   <!-- ========== 特集動画 ========== -->
   <section class="section section--tint" id="movie">
-    <div class="inner">
+    <div class="inner inner--movie">
       <div class="section__head">
         <span class="section__label">MOVIE</span>
         <h2 class="section__title">統一地方選挙 特集動画</h2>
       </div>
 
       <div class="movie-toolbar">
-        <nav class="movie-dates" aria-label="告示日">
-          <a href="#movie-soon" data-movie-date="soon">準備中</a>
-          <a href="#movie-2027-03-25" data-movie-date="2027-03-25">3/25 道府県知事</a>
-          <a href="#movie-2027-03-28" data-movie-date="2027-03-28">3/28 政令市長</a>
-          <a href="#movie-2027-04-02" data-movie-date="2027-04-02">4/2 道府県議・政令市議</a>
-          <a href="#movie-2027-04-18" data-movie-date="2027-04-18">4/18 市区</a>
-          <a href="#movie-2027-04-20" data-movie-date="2027-04-20">4/20 町村</a>
+        <nav class="movie-dates" aria-label="特集動画カテゴリ">
+          <span>道府県知事</span>
+          <span>政令市長</span>
+          <span>道府県議・政令市議</span>
+          <span>市区</span>
+          <span>町村</span>
         </nav>
-        <div class="movie-slider-controls">
-          <button type="button" data-movie-prev aria-label="前の告示日">‹</button>
-          <button type="button" data-movie-next aria-label="次の告示日">›</button>
-        </div>
       </div>
 
-      <div class="movie-slider" id="movie-slider" tabindex="0" aria-label="告示日ごとの特集動画">
-        <article class="movie-slide" id="movie-soon" data-movie-date="soon">
-          <p class="movie-slide__meta">特集動画・準備中</p>
-          <div class="movie-embed movie-embed--soon" role="img" aria-label="特集動画は順次公開予定です">
-            <span>順次公開予定</span>
+      <div class="movie-slider movie-slider--dual" id="movie-slider" aria-label="特集動画">
+        <article class="movie-slide" id="movie-soon-1">
+          <p class="movie-slide__meta">特集動画・順次公開予定</p>
+          <div class="movie-embed movie-embed--soon" role="img" aria-label="特集動画は準備中です">
+            <span>準備中</span>
           </div>
         </article>
-        <article class="movie-slide" id="movie-2027-03-25" data-movie-date="2027-03-25">
-          <p class="movie-slide__meta">告示日 3/25（木）・道府県知事</p>
-          <div class="movie-embed">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </article>
-        <article class="movie-slide" id="movie-2027-03-28" data-movie-date="2027-03-28">
-          <p class="movie-slide__meta">告示日 3/28（日）・政令指定都市市長</p>
-          <div class="movie-embed">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </article>
-        <article class="movie-slide" id="movie-2027-04-02" data-movie-date="2027-04-02">
-          <p class="movie-slide__meta">告示日 4/2（金）・道府県議会議員 / 政令指定都市議会議員</p>
-          <div class="movie-embed">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </article>
-        <article class="movie-slide" id="movie-2027-04-18" data-movie-date="2027-04-18">
-          <p class="movie-slide__meta">告示日 4/18（日）・市区長 / 市区議会議員</p>
-          <div class="movie-embed">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </article>
-        <article class="movie-slide" id="movie-2027-04-20" data-movie-date="2027-04-20">
-          <p class="movie-slide__meta">告示日 4/20（火）・町村長 / 町村議会議員</p>
-          <div class="movie-embed">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/0R6SV6yN-Ac?si=Tt6qL6uxtS2mdpt8" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <article class="movie-slide" id="movie-soon-2">
+          <p class="movie-slide__meta">特集動画・順次公開予定</p>
+          <div class="movie-embed movie-embed--soon" role="img" aria-label="特集動画は準備中です">
+            <span>準備中</span>
           </div>
         </article>
       </div>
@@ -2303,7 +2316,7 @@
 
   <!-- ========== FAQ ========== -->
   <section class="section" id="faq">
-    <div class="inner" style="max-width:840px;">
+    <div class="inner inner--narrow">
       <div class="section__head section__head--center">
         <span class="section__label">FAQ</span>
         <h2 class="section__title">よくある質問</h2>
@@ -2387,18 +2400,7 @@
           <img src="senkyo2027/img/cmn/icon_youtube.svg" alt="YouTube" />
         </a>
       </div>
-      <div class="m_sharePage_links_btn">
-        <a href="https://line.me/R/share?text=" target="_blank" rel="noopener noreferrer" data-share="line">
-          <img src="senkyo2027/img/cmn/circle_line.png" alt="LINE" />
-        </a>
-      </div>
-      <div class="m_sharePage_links_btn">
-        <button type="button" id="share-copy" aria-label="リンクをコピー">
-          <img src="senkyo2027/img/cmn/circle_linkbtn.svg" alt="" />
-        </button>
-      </div>
     </div>
-    <p class="m_sharePage_note" id="share-copied" role="status" hidden>リンクをコピーしました。</p>
   </div>
 
   <!-- ========== 共通フッター（後日、共通コンポーネントに差し替え） ここから ========== -->
@@ -2474,100 +2476,13 @@
     setInterval(() => countdownCards.forEach(updateCountdownCard), 1000);
   }
 
-  /* ---------- 特集動画スライダー（告示日連動） ---------- */
-  const movieSlider = document.getElementById('movie-slider');
-  const movieSlides = movieSlider ? [...movieSlider.querySelectorAll('.movie-slide')] : [];
-  const movieDateLinks = [...document.querySelectorAll('[data-movie-date]')];
-  const moviePrev = document.querySelector('[data-movie-prev]');
-  const movieNext = document.querySelector('[data-movie-next]');
-
-  const movieDateValue = (slide) => slide?.dataset.movieDate || '';
-
-  const noticeTime = (isoDate) => new Date(`${isoDate}T00:00:00+09:00`).getTime();
-
-  const currentNoticeIndex = () => {
-    const now = Date.now();
-    let index = 0;
-    movieSlides.forEach((slide, i) => {
-      const date = movieDateValue(slide);
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return;
-      if (noticeTime(date) <= now) index = i;
+  /* ---------- 特集動画（選挙日程表からのジャンプ） ---------- */
+  document.querySelectorAll('#schedule [data-movie-date]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('movie')?.scrollIntoView({ block: 'start' });
     });
-    return index;
-  };
-
-  const setMovieCurrent = (date) => {
-    document.querySelectorAll('.movie-dates [data-movie-date]').forEach((link) => {
-      if (link.dataset.movieDate === date) {
-        link.setAttribute('aria-current', 'true');
-      } else {
-        link.removeAttribute('aria-current');
-      }
-    });
-    const index = movieSlides.findIndex((slide) => movieDateValue(slide) === date);
-    if (moviePrev) moviePrev.disabled = index <= 0;
-    if (movieNext) movieNext.disabled = index >= movieSlides.length - 1;
-  };
-
-  const goToMovieDate = (date, instant = false) => {
-    const slide = movieSlides.find((item) => movieDateValue(item) === date);
-    if (!slide || !movieSlider) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    movieSlider.scrollTo({
-      left: slide.offsetLeft - 4,
-      behavior: instant || reduce ? 'auto' : 'smooth',
-    });
-    setMovieCurrent(date);
-  };
-
-  if (movieSlider && movieSlides.length) {
-    const initialSlide = movieSlides[currentNoticeIndex()];
-    goToMovieDate(movieDateValue(initialSlide), true);
-
-    movieDateLinks.forEach((link) => {
-      if (link.tagName !== 'A') return;
-      link.addEventListener('click', (e) => {
-        const date = link.dataset.movieDate;
-        if (!date || !document.getElementById(`movie-${date}`)) return;
-        e.preventDefault();
-        goToMovieDate(date);
-        if (link.closest('#schedule')) {
-          document.getElementById('movie').scrollIntoView({ block: 'start' });
-        }
-      });
-    });
-
-    moviePrev?.addEventListener('click', () => {
-      const current = document.querySelector('.movie-dates [aria-current="true"]');
-      const index = Math.max(0, movieSlides.findIndex((slide) => movieDateValue(slide) === current?.dataset.movieDate) - 1);
-      goToMovieDate(movieDateValue(movieSlides[index]));
-    });
-
-    movieNext?.addEventListener('click', () => {
-      const current = document.querySelector('.movie-dates [aria-current="true"]');
-      const index = Math.min(
-        movieSlides.length - 1,
-        movieSlides.findIndex((slide) => movieDateValue(slide) === current?.dataset.movieDate) + 1
-      );
-      goToMovieDate(movieDateValue(movieSlides[index]));
-    });
-
-    const syncFromSnap = (slide) => {
-      if (slide?.dataset?.movieDate) setMovieCurrent(slide.dataset.movieDate);
-    };
-
-    if ('onscrollsnapchange' in HTMLElement.prototype) {
-      movieSlider.addEventListener('scrollsnapchange', (event) => {
-        syncFromSnap(event.snapTargetInline);
-      });
-    } else {
-      const observer = new IntersectionObserver((entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) syncFromSnap(visible.target);
-      }, { root: movieSlider, threshold: 0.6 });
-      movieSlides.forEach((slide) => observer.observe(slide));
-    }
-  }
+  });
 
   /* ---------- 都道府県マップ ---------- */
   const mapEl = document.getElementById('pref-map');
@@ -2595,15 +2510,7 @@
   const assemblyMatchNote = document.getElementById('assembly-match-note');
   const showAllAssembly = document.getElementById('show-all-assembly');
   let currentPrefName = '';
-
-  const formatElectionDate = (date) => {
-    const [year, month, day] = date.split('-').map(Number);
-    return new Intl.DateTimeFormat('ja-JP', {
-      month: 'numeric',
-      day: 'numeric',
-      weekday: 'short',
-    }).format(new Date(year, month - 1, day));
-  };
+  let currentPrefMunicipalities = [];
 
   const renderElectionFrames = (container, entries) => {
     container.replaceChildren();
@@ -2624,15 +2531,6 @@
       count.className = 'election-frame__count';
       count.textContent = `${selectedDistricts.length}選挙区`;
 
-      const dates = document.createElement('p');
-      dates.className = 'election-frame__dates';
-
-      const noticeDate = document.createElement('span');
-      noticeDate.textContent = `告示日 ${formatElectionDate(election.noticeDate)}`;
-
-      const voteDate = document.createElement('span');
-      voteDate.textContent = `投票日 ${formatElectionDate(election.voteDate)}`;
-
       const districts = document.createElement('ul');
       districts.className = 'district-list';
 
@@ -2640,28 +2538,58 @@
         const item = document.createElement('li');
         const link = document.createElement('a');
         const label = document.createElement('span');
-        const municipality = document.createElement('small');
 
         link.href = district.url;
         link.setAttribute('aria-label', `${election.name} ${district.name}のページを見る`);
         label.textContent = district.name;
 
-        municipality.className = 'district-list__municipality';
-        municipality.textContent = `自治体：${district.municipality}`;
-
-        label.appendChild(municipality);
         link.appendChild(label);
         item.appendChild(link);
         districts.appendChild(item);
       });
 
       head.append(title, count);
-      dates.append(noticeDate, voteDate);
-      frame.append(head, dates, districts);
+      frame.append(head, districts);
       fragment.appendChild(frame);
     });
 
     container.appendChild(fragment);
+  };
+
+  // 市区町村選択後：選挙名だけの1行リンクで並べる（選挙区名が選挙名と重複する場合は出さない）
+  const renderElectionLinks = (container, entries) => {
+    container.replaceChildren();
+    const rows = [];
+    entries.forEach(({ election, districts: selectedDistricts }) => {
+      selectedDistricts.forEach((district) => rows.push({ election, district }));
+    });
+    if (!rows.length) return;
+
+    const list = document.createElement('ul');
+    list.className = 'election-links';
+    rows.forEach(({ election, district }) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      const name = document.createElement('span');
+      name.className = 'election-links__name';
+      name.textContent = election.name;
+      link.href = district.url;
+      link.appendChild(name);
+
+      const isDuplicate = !district.name
+        || election.name.includes(district.name)
+        || district.name === district.municipality;
+      if (!isDuplicate) {
+        const sub = document.createElement('span');
+        sub.className = 'election-links__district';
+        sub.textContent = district.name;
+        link.appendChild(sub);
+      }
+      link.setAttribute('aria-label', `${election.name}${isDuplicate ? '' : ' ' + district.name}のページを見る`);
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+    container.appendChild(list);
   };
 
   const setSelectedPref = (prefName) => {
@@ -2684,11 +2612,11 @@
     }))
     .filter(({ districts }) => districts.length);
 
-  const getMunicipalities = (pref) => {
+  const collectMunicipalities = (pref, prefName) => {
     const municipalities = new Map();
     pref.elections.forEach((election) => {
       election.districts.forEach((district) => {
-        if (district.municipality === currentPrefName) return;
+        if (district.municipality === prefName) return;
         if (!municipalities.has(district.municipality)) {
           municipalities.set(district.municipality, new Set());
         }
@@ -2696,8 +2624,58 @@
       });
     });
     return [...municipalities.entries()]
-      .map(([name, electionIds]) => ({ name, count: electionIds.size }))
+      .map(([name, electionIds]) => ({ name, count: electionIds.size }));
+  };
+
+  const getMunicipalities = (pref, prefName) =>
+    collectMunicipalities(pref, prefName)
       .sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+
+  const allMunicipalities = Object.entries(prefElectionData).flatMap(([prefName, pref]) =>
+    collectMunicipalities(pref, prefName).map((m) => ({ ...m, pref: prefName }))
+  ).sort((a, b) =>
+    a.name.localeCompare(b.name, 'ja') || a.pref.localeCompare(b.pref, 'ja')
+  );
+
+  const renderMunicipalityListItems = (municipalities, { showPref = false } = {}) => {
+    municipalityList.replaceChildren();
+    const fragment = document.createDocumentFragment();
+
+    municipalities.forEach((municipality) => {
+      const prefName = municipality.pref || currentPrefName;
+      const item = document.createElement('li');
+      item.dataset.name = municipality.name;
+
+      const link = document.createElement('a');
+      link.href = buildAreaUrl({ pref: prefName, municipality: municipality.name });
+      link.dataset.pref = prefName;
+      link.dataset.municipality = municipality.name;
+
+      const labelWrap = document.createElement('span');
+      labelWrap.className = 'municipality-list__label';
+
+      const label = document.createElement('span');
+      label.textContent = municipality.name;
+      labelWrap.appendChild(label);
+
+      if (showPref) {
+        const prefLabel = document.createElement('span');
+        prefLabel.className = 'municipality-list__pref';
+        prefLabel.textContent = prefName;
+        labelWrap.appendChild(prefLabel);
+      }
+
+      const count = document.createElement('span');
+      count.className = 'municipality-list__count';
+      count.textContent = `${municipality.count}件`;
+
+      link.append(labelWrap, count);
+      item.appendChild(link);
+      fragment.appendChild(item);
+    });
+
+    municipalityList.appendChild(fragment);
+    municipalityListEmpty.hidden = municipalities.length > 0;
   };
 
   const buildAreaUrl = ({ pref, municipality = '', view = '' }) => {
@@ -2733,34 +2711,15 @@
       return;
     }
 
-    const municipalities = getMunicipalities(pref);
+    currentPrefMunicipalities = getMunicipalities(pref, prefName);
     const assemblyEntries = getPrefAssemblyEntries(pref);
     prefElectionsTitle.textContent = `${prefName}の市区町村を選ぶ`;
     prefElectionsSummary.textContent =
-      `${municipalities.length.toLocaleString('ja-JP')}市区町村から選択`;
+      `${currentPrefMunicipalities.length.toLocaleString('ja-JP')}市区町村から選択`;
 
-    const fragment = document.createDocumentFragment();
-    municipalities.forEach((municipality) => {
-      const item = document.createElement('li');
-      item.dataset.name = municipality.name;
-
-      const link = document.createElement('a');
-      link.href = buildAreaUrl({ pref: prefName, municipality: municipality.name });
-      link.dataset.municipality = municipality.name;
-
-      const label = document.createElement('span');
-      label.textContent = municipality.name;
-
-      const count = document.createElement('span');
-      count.className = 'municipality-list__count';
-      count.textContent = `${municipality.count}件`;
-
-      link.append(label, count);
-      item.appendChild(link);
-      fragment.appendChild(item);
-    });
-    municipalityList.appendChild(fragment);
-    municipalityListEmpty.hidden = municipalities.length > 0;
+    renderMunicipalityListItems(
+      currentPrefMunicipalities.map((m) => ({ ...m, pref: prefName }))
+    );
 
     prefAssemblyDirect.hidden = assemblyEntries.length === 0;
     if (assemblyEntries.length) {
@@ -2830,10 +2789,10 @@
     assemblyCategoryTitle.textContent = `${prefName}議会の選挙区`;
 
     localElectionCategory.hidden = false;
-    renderElectionFrames(localElectionList, localEntries);
+    renderElectionLinks(localElectionList, localEntries);
     localElectionEmpty.hidden = localEntries.length > 0;
 
-    renderElectionFrames(assemblyElectionList, matchedAssemblyEntries);
+    renderElectionLinks(assemblyElectionList, matchedAssemblyEntries);
     assemblyElectionEmpty.hidden = assemblyEntries.length > 0;
     assemblyMatchNote.hidden =
       assemblyEntries.length === 0 || matchedAssemblyEntries.length > 0;
@@ -2881,20 +2840,22 @@
       const link = e.target.closest('a[data-municipality]');
       if (!link) return;
       e.preventDefault();
-      renderMunicipalityResult(currentPrefName, link.dataset.municipality);
-      updateAreaUrl({ pref: currentPrefName, municipality: link.dataset.municipality });
+      const prefName = link.dataset.pref || currentPrefName;
+      renderMunicipalityResult(prefName, link.dataset.municipality);
+      updateAreaUrl({ pref: prefName, municipality: link.dataset.municipality });
       prefElectionsEl.scrollIntoView({ block: 'start' });
     });
 
     municipalitySearch.addEventListener('input', () => {
       const keyword = municipalitySearch.value.trim();
-      let visibleCount = 0;
-      municipalityList.querySelectorAll('li').forEach((item) => {
-        const visible = !keyword || item.dataset.name.includes(keyword);
-        item.hidden = !visible;
-        if (visible) visibleCount += 1;
-      });
-      municipalityListEmpty.hidden = visibleCount > 0;
+      if (!keyword) {
+        renderMunicipalityListItems(
+          currentPrefMunicipalities.map((m) => ({ ...m, pref: currentPrefName }))
+        );
+        return;
+      }
+      const matches = allMunicipalities.filter((m) => m.name.includes(keyword));
+      renderMunicipalityListItems(matches, { showPref: true });
     });
 
     municipalityBack.addEventListener('click', () => {
@@ -2979,32 +2940,6 @@
 
   dialog.addEventListener('click', (e) => {
     if (e.target === dialog || e.target.closest('[data-close-dialog]')) dialog.close();
-  });
-
-  /* ---------- シェア ---------- */
-  const shareUrl = location.href.split('#')[0];
-  const shareText = document.title;
-
-  const shareEndpoints = {
-    line: `https://line.me/R/share?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`,
-  };
-
-  document.querySelectorAll('[data-share]').forEach((link) => {
-    const href = shareEndpoints[link.dataset.share];
-    if (href) link.href = href;
-  });
-
-  const copyBtn = document.getElementById('share-copy');
-  const copied = document.getElementById('share-copied');
-
-  copyBtn.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      copied.textContent = 'リンクをコピーしました。';
-    } catch {
-      copied.textContent = `コピーできませんでした。URL: ${shareUrl}`;
-    }
-    copied.hidden = false;
   });
 
   /* ---------- ページ先頭へ戻る ---------- */
